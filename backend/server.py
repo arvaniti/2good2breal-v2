@@ -4089,6 +4089,188 @@ async def seeker_serve_temp_photo(filename: str):
     return Response(content=content, media_type="image/jpeg")
 
 
+@api_router.get("/seeker/profiles/{profile_id}/report-pdf")
+async def seeker_investigation_pdf(profile_id: str, admin: dict = Depends(get_admin_user)):
+    """Generate PDF report for Profile Seeker investigation results."""
+    profile = await db.seeker_profiles.find_one({"id": profile_id}, {"_id": 0})
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    
+    searches = profile.get("search_results", [])
+    latest = None
+    for s in reversed(searches):
+        if s.get("status") == "completed":
+            latest = s
+            break
+    if not latest:
+        raise HTTPException(status_code=404, detail="No completed investigation found")
+    
+    r = latest.get("results", {})
+    ai = r.get("ai_analysis", {})
+    name = f"{profile.get('first_name', '')} {profile.get('last_name', '')}".strip()
+    
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4, leftMargin=2*cm, rightMargin=2*cm, topMargin=2*cm, bottomMargin=2*cm)
+    styles = getSampleStyleSheet()
+    
+    title_style = ParagraphStyle('Title2', parent=styles['Title'], fontSize=18, textColor=colors.HexColor('#7c3aed'), spaceAfter=6)
+    heading_style = ParagraphStyle('H2', parent=styles['Heading2'], fontSize=13, textColor=colors.HexColor('#7c3aed'), spaceBefore=12, spaceAfter=4)
+    body_style = ParagraphStyle('Body2', parent=styles['Normal'], fontSize=9, leading=12, spaceAfter=4)
+    small_style = ParagraphStyle('Small', parent=styles['Normal'], fontSize=8, leading=10, textColor=colors.grey)
+    red_style = ParagraphStyle('Red', parent=body_style, textColor=colors.HexColor('#ef4444'))
+    green_style = ParagraphStyle('Green', parent=body_style, textColor=colors.HexColor('#22c55e'))
+    
+    elements = []
+    elements.append(Paragraph("OSINT Investigation Report", title_style))
+    elements.append(Paragraph(f"<b>Subject:</b> {name} | <b>Location:</b> {profile.get('address', 'N/A')} | <b>Date:</b> {datetime.now(timezone.utc).strftime('%d/%m/%Y')}", body_style))
+    elements.append(Spacer(1, 8))
+    
+    # Score & Risk
+    risk = (ai.get('risk_level', 'N/A')).upper()
+    risk_color = '#ef4444' if risk in ['CRITICAL', 'HIGH'] else '#eab308' if risk == 'MEDIUM' else '#22c55e'
+    score = ai.get('online_presence_score', 0)
+    elements.append(Paragraph(f"<font size=24 color='{risk_color}'><b>{score}%</b></font> Online Presence &nbsp;&nbsp; <font color='{risk_color}'><b>Risk: {risk}</b></font>" + (" &nbsp; <font color='#ef4444'><b>IMAGE REUSE DETECTED</b></font>" if ai.get('image_reuse_detected') else ""), body_style))
+    elements.append(Spacer(1, 6))
+    
+    if ai.get('summary'):
+        elements.append(Paragraph(f"<b>Summary:</b> {ai['summary']}", body_style))
+    
+    if ai.get('social_media_found'):
+        elements.append(Paragraph(f"<b>Social Media Found:</b> {', '.join(ai['social_media_found'])}", body_style))
+    
+    if ai.get('suspicious_findings'):
+        elements.append(Paragraph("Suspicious Findings", heading_style))
+        for f in ai['suspicious_findings']:
+            elements.append(Paragraph(f"- {f}", red_style))
+    
+    if ai.get('positive_findings'):
+        elements.append(Paragraph("Positive Findings", heading_style))
+        for f in ai['positive_findings']:
+            elements.append(Paragraph(f"- {f}", green_style))
+    
+    if ai.get('recommendation'):
+        elements.append(Paragraph("Recommendation", heading_style))
+        elements.append(Paragraph(ai['recommendation'], body_style))
+    
+    # Web Results
+    web = r.get('web_results', [])
+    if web:
+        elements.append(Paragraph(f"Web Search Results ({len(web)})", heading_style))
+        table_data = [['Title', 'Source']]
+        for w in web[:15]:
+            table_data.append([Paragraph(w.get('title', '')[:60], small_style), Paragraph(w.get('source', w.get('link', ''))[:50], small_style)])
+        t = Table(table_data, colWidths=[10*cm, 7*cm])
+        t.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f3f4f6')), ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#e5e7eb')), ('FONTSIZE', (0, 0), (-1, -1), 8), ('VALIGN', (0, 0), (-1, -1), 'TOP')]))
+        elements.append(t)
+    
+    # Image Results
+    img_results = r.get('image_results', [])
+    if img_results:
+        elements.append(Paragraph("Reverse Image Results", heading_style))
+        for ir in img_results:
+            elements.append(Paragraph(f"<b>Photo {ir.get('photo_index', 0) + 1}:</b> {ir.get('matches_count', 0)} matches", body_style))
+            if ir.get('matches'):
+                tdata = [['Found On', 'Link']]
+                for m in ir['matches'][:5]:
+                    tdata.append([Paragraph(m.get('title', '')[:50], small_style), Paragraph(m.get('link', '')[:50], small_style)])
+                t2 = Table(tdata, colWidths=[10*cm, 7*cm])
+                t2.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f3f4f6')), ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#e5e7eb')), ('FONTSIZE', (0, 0), (-1, -1), 8), ('VALIGN', (0, 0), (-1, -1), 'TOP')]))
+                elements.append(t2)
+    
+    elements.append(Spacer(1, 20))
+    elements.append(HRFlowable(width="100%", color=colors.HexColor('#e5e7eb')))
+    elements.append(Paragraph(f"Generated by 2good2breal Profile Seeker | {datetime.now(timezone.utc).strftime('%d/%m/%Y %H:%M')}", small_style))
+    
+    doc.build(elements)
+    buffer.seek(0)
+    
+    filename = f"investigation_{name.replace(' ', '_')}_{datetime.now(timezone.utc).strftime('%Y%m%d')}.pdf"
+    return Response(content=buffer.getvalue(), media_type="application/pdf", headers={"Content-Disposition": f"attachment; filename={filename}"})
+
+@api_router.post("/seeker/comparator-pdf")
+async def seeker_comparator_pdf(data: ComparePhotosRequest, admin: dict = Depends(get_admin_user)):
+    """Generate PDF for photo comparison results. Expects comparison result in request."""
+    # Get the latest comparison from DB
+    comparison = None
+    if data.profile1_id and data.profile2_id:
+        comparison = await db.seeker_comparisons.find_one(
+            {"profile1_id": data.profile1_id, "profile2_id": data.profile2_id},
+            {"_id": 0},
+            sort=[("created_at", -1)]
+        )
+    if not comparison:
+        # Try to get the most recent comparison
+        comparison = await db.seeker_comparisons.find_one({}, {"_id": 0}, sort=[("created_at", -1)])
+    if not comparison:
+        raise HTTPException(status_code=404, detail="No comparison found. Run a comparison first.")
+    
+    analysis = comparison.get("analysis", {})
+    
+    # Get profile names
+    p1_name = "Profile A"
+    p2_name = "Profile B"
+    if data.profile1_id:
+        p1 = await db.seeker_profiles.find_one({"id": data.profile1_id}, {"_id": 0, "first_name": 1, "last_name": 1})
+        if p1: p1_name = f"{p1.get('first_name', '')} {p1.get('last_name', '')}".strip()
+    if data.profile2_id:
+        p2 = await db.seeker_profiles.find_one({"id": data.profile2_id}, {"_id": 0, "first_name": 1, "last_name": 1})
+        if p2: p2_name = f"{p2.get('first_name', '')} {p2.get('last_name', '')}".strip()
+    
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4, leftMargin=2*cm, rightMargin=2*cm, topMargin=2*cm, bottomMargin=2*cm)
+    styles = getSampleStyleSheet()
+    
+    title_style = ParagraphStyle('Title2b', parent=styles['Title'], fontSize=18, textColor=colors.HexColor('#7c3aed'), spaceAfter=6)
+    heading_style = ParagraphStyle('H2b', parent=styles['Heading2'], fontSize=13, textColor=colors.HexColor('#7c3aed'), spaceBefore=12, spaceAfter=4)
+    body_style = ParagraphStyle('Body2b', parent=styles['Normal'], fontSize=10, leading=13, spaceAfter=4)
+    small_style = ParagraphStyle('Smallb', parent=styles['Normal'], fontSize=8, textColor=colors.grey)
+    
+    elements = []
+    elements.append(Paragraph("Photo Comparison Report", title_style))
+    elements.append(Paragraph(f"<b>{p1_name}</b> vs <b>{p2_name}</b> | Date: {datetime.now(timezone.utc).strftime('%d/%m/%Y')}", body_style))
+    elements.append(Spacer(1, 12))
+    
+    # Score
+    score = analysis.get('similarity_score', 0)
+    same = analysis.get('same_person', False)
+    score_color = '#ef4444' if score >= 75 else '#f59e0b' if score >= 50 else '#22c55e'
+    verdict_text = "LIKELY SAME PERSON" if same else "LIKELY DIFFERENT PEOPLE"
+    verdict_color = '#ef4444' if same else '#22c55e'
+    
+    elements.append(Paragraph(f"<font size=28 color='{score_color}'><b>{score}%</b></font> Similarity Score", body_style))
+    elements.append(Paragraph(f"<font color='{verdict_color}'><b>{verdict_text}</b></font> &nbsp; (Confidence: {analysis.get('confidence', 'N/A')})", body_style))
+    elements.append(Spacer(1, 8))
+    
+    if analysis.get('facial_analysis'):
+        elements.append(Paragraph("Facial Analysis", heading_style))
+        elements.append(Paragraph(analysis['facial_analysis'], body_style))
+    
+    if analysis.get('verdict'):
+        elements.append(Paragraph("Verdict", heading_style))
+        elements.append(Paragraph(f"<b>{analysis['verdict']}</b>", body_style))
+    
+    if analysis.get('inconsistencies'):
+        elements.append(Paragraph("Inconsistencies", heading_style))
+        for inc in analysis['inconsistencies']:
+            elements.append(Paragraph(f"- {inc}", body_style))
+    
+    if analysis.get('manipulation_signs'):
+        elements.append(Paragraph("Manipulation Signs", heading_style))
+        for sign in analysis['manipulation_signs']:
+            elements.append(Paragraph(f"- {sign}", ParagraphStyle('RedBody', parent=body_style, textColor=colors.HexColor('#ef4444'))))
+    
+    elements.append(Spacer(1, 20))
+    elements.append(HRFlowable(width="100%", color=colors.HexColor('#e5e7eb')))
+    elements.append(Paragraph(f"Generated by 2good2breal Comparator | {datetime.now(timezone.utc).strftime('%d/%m/%Y %H:%M')}", small_style))
+    
+    doc.build(elements)
+    buffer.seek(0)
+    
+    filename = f"comparison_{p1_name.replace(' ', '_')}_vs_{p2_name.replace(' ', '_')}_{datetime.now(timezone.utc).strftime('%Y%m%d')}.pdf"
+    return Response(content=buffer.getvalue(), media_type="application/pdf", headers={"Content-Disposition": f"attachment; filename={filename}"})
+
+
+
 
 # Include the router in the main app
 app.include_router(api_router)

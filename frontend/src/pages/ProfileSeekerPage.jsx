@@ -6,7 +6,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
 import { Badge } from '../components/ui/badge';
-import { Search, Plus, Trash2, Upload, X, User, MapPin, Calendar, FileText, ChevronLeft, Image, Edit2, Save, Printer } from 'lucide-react';
+import { Search, Plus, Trash2, Upload, X, User, MapPin, Calendar, FileText, ChevronLeft, Image, Edit2, Save, Printer, Download } from 'lucide-react';
 import axios from 'axios';
 import { toast } from 'sonner';
 
@@ -328,7 +328,20 @@ function Detail(props) {
           : React.createElement(React.Fragment, null, React.createElement(Search, { className: 'w-4 h-4 mr-1' }), ' Run Investigation')
       ),
       latestSearch && latestSearch.results ? React.createElement(Button, { size: 'sm', variant: 'outline', onClick: printResults, className: 'border-zinc-700 text-zinc-300' },
-        React.createElement(Printer, { className: 'w-4 h-4 mr-1' }), ' Print Results'
+        React.createElement(Printer, { className: 'w-4 h-4 mr-1' }), ' Print'
+      ) : null,
+      latestSearch && latestSearch.results ? React.createElement(Button, { size: 'sm', variant: 'outline', onClick: function() {
+        axios.get(API + '/seeker/profiles/' + props.profile.id + '/report-pdf', Object.assign({}, getHeaders(), { responseType: 'blob' }))
+          .then(function(res) {
+            var url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+            var a = document.createElement('a'); a.href = url;
+            a.download = 'investigation_' + (form.first_name || '') + '_' + (form.last_name || '') + '.pdf';
+            a.click(); window.URL.revokeObjectURL(url);
+            toast.success('PDF downloaded');
+          })
+          .catch(function() { toast.error('PDF download failed'); });
+      }, className: 'border-zinc-700 text-zinc-300' },
+        React.createElement(Download, { className: 'w-4 h-4 mr-1' }), ' PDF'
       ) : null,
       editing
         ? React.createElement(Button, { size: 'sm', onClick: save, className: 'bg-emerald-600 hover:bg-emerald-500' }, React.createElement(Save, { className: 'w-4 h-4 mr-1' }), ' Save')
