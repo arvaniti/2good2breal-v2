@@ -1047,9 +1047,32 @@ async def get_admin_user(credentials: HTTPAuthorizationCredentials = Depends(sec
 
 @api_router.post("/admin/login", response_model=AdminTokenResponse)
 async def admin_login(credentials: AdminLogin):
-    """Admin login endpoint - verifies against MongoDB."""
+    """Admin login endpoint - verifies against MongoDB. Auto-seeds admin if not exists."""
+    # Auto-seed admin if collection is empty (handles serverless cold starts)
+    admin_count = await db.admin_users.count_documents({})
+    if admin_count == 0:
+        try:
+            await seed_admin_user()
+        except Exception as e:
+            logging.error(f"Auto-seed admin failed: {e}")
+    
     admin = await db.admin_users.find_one({"username": credentials.username})
-    if not admin or not verify_password(credentials.password, admin["password_hash"]):
+    if not admin:
+        # Try seeding with the provided credentials if they match env defaults
+        default_username = os.environ.get('ADMIN_USERNAME', 'admin')
+        default_password = os.environ.get('ADMIN_PASSWORD', 'admin2026')
+        if credentials.username == default_username and credentials.password == default_password:
+            hashed = hash_password(credentials.password)
+            await db.admin_users.insert_one({
+                "username": credentials.username,
+                "password_hash": hashed,
+                "created_at": datetime.now(timezone.utc)
+            })
+            token = create_admin_token()
+            return AdminTokenResponse(access_token=token)
+        raise HTTPException(status_code=401, detail="Invalid admin credentials")
+    
+    if not verify_password(credentials.password, admin["password_hash"]):
         raise HTTPException(status_code=401, detail="Invalid admin credentials")
     
     token = create_admin_token()
