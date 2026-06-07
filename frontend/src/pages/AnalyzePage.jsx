@@ -679,7 +679,7 @@ export const AnalyzePage = () => {
           <style>{`
             @media print {
               * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-              body { background: white !important; margin: 0; padding: 20px; font-family: 'Georgia', serif; }
+              body { background: white !important; margin: 0 !important; padding: 0 !important; font-family: 'Georgia', serif; }
               .no-print { display: none !important; }
               nav, header, footer { display: none !important; }
               .print-letter { 
@@ -688,24 +688,34 @@ export const AnalyzePage = () => {
                 border: none !important;
                 box-shadow: none !important;
                 margin: 0 !important;
-                padding: 40px !important;
+                padding: 0 !important;
                 font-family: 'Georgia', serif !important;
               }
               .print-letter * { color: black !important; font-family: 'Georgia', serif !important; }
-              .print-letter h1 { color: #7c3aed !important; font-size: 24px !important; }
+              .print-letter h1 { color: #7c3aed !important; font-size: 18px !important; margin: 0 !important; }
               .print-letter .letter-header { 
                 border-bottom: 2px solid #7c3aed !important; 
-                padding-bottom: 20px !important;
-                margin-bottom: 30px !important;
+                padding: 12px 30px !important;
+                margin-bottom: 0 !important;
               }
               .print-letter .letter-body { 
-                font-size: 14px !important; 
-                line-height: 1.8 !important; 
+                font-size: 11px !important; 
+                line-height: 1.5 !important;
+                padding: 12px 30px !important;
               }
+              .print-letter .letter-body p { margin-bottom: 5px !important; }
+              .print-letter .letter-body ul { margin: 4px 0 4px 18px !important; }
+              .print-letter .letter-body li { margin-bottom: 1px !important; }
+              .print-letter .letter-body .mb-8 { margin-bottom: 8px !important; }
+              .print-letter .letter-body .mb-6 { margin-bottom: 5px !important; }
+              .print-letter .letter-body .my-6 { margin: 6px 0 !important; }
+              .print-letter .letter-body .space-y-4 > * + * { margin-top: 4px !important; }
               .print-letter .signature { 
-                margin-top: 40px !important;
+                margin-top: 10px !important;
                 font-style: italic !important;
               }
+              .print-letter .mt-6 { margin-top: 8px !important; }
+              .print-letter .pt-4 { padding-top: 5px !important; }
             }
           `}</style>
 
@@ -732,7 +742,7 @@ export const AnalyzePage = () => {
           {/* Acceptance Letter */}
           <div ref={printRef} className="print-letter bg-white rounded-2xl overflow-hidden border border-zinc-300 shadow-lg">
             {/* Letter Header */}
-            <div className="letter-header bg-purple-50 p-8 border-b-2 border-purple-600">
+            <div className="letter-header bg-purple-50 p-5 border-b-2 border-purple-600">
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-bold text-purple-700 font-sans"><span className="text-3xl">2</span>good<span className="text-3xl">2</span>breal</h1>
@@ -747,9 +757,9 @@ export const AnalyzePage = () => {
             </div>
 
             {/* Letter Body */}
-            <div className="letter-body p-8 bg-white text-gray-800">
+            <div className="letter-body p-6 bg-white text-gray-800">
               {/* Date and Reference */}
-              <div className="mb-8 flex justify-between items-start">
+              <div className="mb-4 flex justify-between items-start">
                 <div>
                   <p className="text-gray-600">{submissionData.submissionDate}</p>
                 </div>
@@ -760,7 +770,7 @@ export const AnalyzePage = () => {
               </div>
 
               {/* Salutation - First name only */}
-              <div className="mb-6">
+              <div className="mb-4">
                 <p className="text-lg">
                   {isFr ? 'Cher(e)' : 'Dear'} <span className="font-semibold">{submissionData.clientFirstName}</span>,
                 </p>
@@ -781,7 +791,7 @@ export const AnalyzePage = () => {
                 </p>
 
                 {/* Submission Details Box */}
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 my-6">
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 my-4">
                   <h3 className="font-semibold text-purple-700 mb-3">{isFr ? 'Détails de la Soumission' : 'Submission Details'}</h3>
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
@@ -831,13 +841,13 @@ export const AnalyzePage = () => {
               </div>
 
               {/* Signature */}
-              <div className="signature mt-10">
+              <div className="signature mt-6">
                 <p>{isFr ? 'Cordialement,' : 'Best Regards,'}</p>
-                <p className="font-semibold mt-2">{isFr ? 'L\'équipe 2good2breal' : '2good2breal team'}</p>
+                <p className="font-semibold mt-1">{isFr ? 'L\'équipe 2good2breal' : '2good2breal team'}</p>
               </div>
 
               {/* Contact Footer */}
-              <div className="mt-6 pt-4 border-t border-gray-200 text-sm text-gray-600">
+              <div className="mt-4 pt-3 border-t border-gray-200 text-sm text-gray-600">
                 <div className="flex justify-between">
                   <div>
                     <p>+33 (0) 7 43 66 05 55</p>
