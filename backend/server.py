@@ -3480,6 +3480,9 @@ async def create_checkout(
     """Create a Stripe checkout session for a package."""
     import stripe
     
+    if not STRIPE_API_KEY:
+        raise HTTPException(status_code=500, detail="Payment system not configured. Please contact support.")
+    
     # Validate package exists
     if checkout_data.package_id not in PRICING_PACKAGES:
         raise HTTPException(status_code=400, detail="Invalid package ID")
@@ -3511,35 +3514,39 @@ async def create_checkout(
     if promo_applied:
         product_description = f"{package['description']} (Code promo -{DISCOUNT_PERCENT}% appliqué)"
     
-    session = stripe.checkout.Session.create(
-        payment_method_types=["card"],
-        line_items=[{
-            "price_data": {
-                "currency": package["currency"],
-                "product_data": {
-                    "name": package["name"],
-                    "description": product_description
+    try:
+        session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=[{
+                "price_data": {
+                    "currency": package["currency"],
+                    "product_data": {
+                        "name": package["name"],
+                        "description": product_description
+                    },
+                    "unit_amount": int(final_amount * 100)  # Stripe uses cents
                 },
-                "unit_amount": int(final_amount * 100)  # Stripe uses cents
-            },
-            "quantity": 1
-        }],
-        mode="payment",
-        success_url=success_url,
-        cancel_url=cancel_url,
-        locale="en",  # Force English language
-        customer_email=current_user["email"],  # Pre-fill client's email on Stripe page
-        metadata={
-            "user_id": current_user["id"],
-            "user_email": current_user["email"],
-            "package_id": checkout_data.package_id,
-            "package_name": package["name"],
-            "profiles_included": str(package["profiles_included"]),
-            "promo_code": checkout_data.promo_code if promo_applied else "",
-            "original_amount": str(original_amount),
-            "discount_percent": str(DISCOUNT_PERCENT) if promo_applied else "0"
-        }
-    )
+                "quantity": 1
+            }],
+            mode="payment",
+            success_url=success_url,
+            cancel_url=cancel_url,
+            locale="en",  # Force English language
+            customer_email=current_user["email"],  # Pre-fill client's email on Stripe page
+            metadata={
+                "user_id": current_user["id"],
+                "user_email": current_user["email"],
+                "package_id": checkout_data.package_id,
+                "package_name": package["name"],
+                "profiles_included": str(package["profiles_included"]),
+                "promo_code": checkout_data.promo_code if promo_applied else "",
+                "original_amount": str(original_amount),
+                "discount_percent": str(DISCOUNT_PERCENT) if promo_applied else "0"
+            }
+        )
+    except Exception as e:
+        logging.error(f"Stripe checkout creation failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to create checkout session: {str(e)}")
     
     # Create payment transaction record in database
     transaction = {
