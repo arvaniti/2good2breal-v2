@@ -111,16 +111,16 @@ export const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-4xl sm:text-5xl font-bold text-yellow-400 mb-2">50K+</div>
+              <div className="text-4xl sm:text-5xl font-bold text-yellow-400 mb-2">100K+</div>
               <div className="text-zinc-400">Database</div>
             </div>
             <div className="text-center">
               <div className="text-4xl sm:text-5xl font-bold text-white mb-2">97%</div>
-              <div className="text-zinc-400">{t('landing.stats.accuracy')}</div>
+              <div className="text-zinc-400">Detection Accuracy</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl sm:text-5xl font-bold text-yellow-400 mb-2">90K+</div>
-              <div className="text-zinc-400">{t('landing.stats.users')}</div>
+              <div className="text-4xl sm:text-5xl font-bold text-yellow-400 mb-2">100%</div>
+              <div className="text-zinc-400">Manual Review</div>
             </div>
           </div>
         </div>
