@@ -227,8 +227,7 @@ export const LandingPage = () => {
             <p>{t('landing.about.description4')}</p>
             
             <div className="py-6 border-y border-zinc-800">
-              <p className="text-xl text-white font-semibold">{t('landing.about.team')}</p>
-              <p className="text-purple-400 font-medium mt-2">{t('landing.about.team')}</p>
+              <p className="text-xl text-white font-semibold">{t('landing.about.delivery')}</p>
             </div>
 
             {/* 48 Hours Delivery */}
