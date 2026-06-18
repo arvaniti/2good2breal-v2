@@ -278,10 +278,10 @@ export const LandingPage = () => {
             
             <div className="mt-4 bg-zinc-800/50 border border-zinc-700 rounded-xl p-4">
               <p className="text-purple-400 font-bold text-lg mb-2">{t('landing.about.contactTitle')}</p>
-              <p className="text-zinc-300">
+              <p className="text-zinc-300 -ml-2">
                 WhatsApp 1 : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a>
               </p>
-              <p className="text-zinc-300">
+              <p className="text-zinc-300 -ml-2">
                 WhatsApp 2 : <a href="tel:+33767925545" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 67 92 55 45</a>
               </p>
               <div className="mt-3 pt-3 border-t border-zinc-700">
