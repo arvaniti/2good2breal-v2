@@ -71,7 +71,7 @@ export const translations = {
         badge: "This Is Not A Dating Site",
         title: "2good2breal is a Professional Profile Verification Service.",
         description1: "We specialize in verifying and vetting your selected profiles across all major platforms, websites, and online environments, using advanced intelligence and manual multi sourcing methods to deliver accurate and comprehensive results.",
-        description2: "We understand vetting and verifying a potential partner (casual or long term) is time consuming, demanding and places one under unnecessary pressure.",
+        description2: "We understand that vetting and verifying a potential partner\u2014whether casual or long\u2011term\u2014can be time\u2011consuming, demanding, and emotionally stressful.",
         description3: "Without the experience, knowledge and know-how of today's technology, including A.I. progressive systems and social platform researches it is almost impossible to differentiate between who is and who is not sincere in the dating domain.",
         description4: "2good2breal intensely focus on helping distressed ladies and gentlemen unknowingly communicating to false profiles, often claiming to be a marine or military person, an engineer or biologist, a lawyer, surgeon or to be involved in real estate and property development.",
         team: "Our team has years of proven experience and success.",
