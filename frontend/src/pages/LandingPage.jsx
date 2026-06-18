@@ -77,9 +77,6 @@ export const LandingPage = () => {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight" style={{color: '#c084fc'}} data-testid="hero-title">
               {t('landing.hero.title')}
-              <span className="block mt-2" style={{color: '#a553be'}}>
-                Confidently and Discreetly
-              </span>
             </h1>
 
             <p className="text-lg sm:text-xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
