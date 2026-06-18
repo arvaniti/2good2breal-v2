@@ -76,7 +76,7 @@ export const translations = {
         description4: "2good2breal focuses on helping distressed women and men who are unknowingly communicating with false profiles\u2014often impersonating military personnel, engineers, biologists, lawyers, surgeons, or individuals claiming to work in real estate and property development.",
         team: "Our team brings years of proven experience and success. At 2good2breal, we handle the entire process for you with confidence, professionalism, and complete discretion.",
         confidence: "",
-        delivery: "Within 48 hours, our team will provide you with a completed and accurate, trusted dossier including an information score pertaining to your potential chosen profile.",
+        delivery: "Within 48 hours, our team will deliver a complete, accurate, and trusted dossier, including an information score for your selected profile.",
         result: "You will be relieved of these essential research complexities and progress rapidly in finding a suitable companion of your choice with complete confidence. Our senior consultants provide you confidential, one on one online and phone support within minutes between the hours of 9:00 am and 6:00 pm (CET), 6 days per week. For your first contact with our team, it's very simple: just send us a text message to one of our WhatsApp numbers briefly explaining your request. We'll receive it and call you back.",
         contactTitle: "CONTACT",
         contactWhatsApp: "WhatsApp 1   +33 (0) 7 43 66 05 55",
