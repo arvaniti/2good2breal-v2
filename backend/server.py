@@ -3514,6 +3514,7 @@ async def create_checkout(
     if promo_applied:
         product_description = f"{package['description']} (Code promo -{DISCOUNT_PERCENT}% appliqué)"
     
+    session = None
     try:
         session = stripe.checkout.Session.create(
             payment_method_types=["card"],

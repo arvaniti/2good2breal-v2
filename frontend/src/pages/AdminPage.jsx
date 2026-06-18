@@ -350,16 +350,16 @@ function AnalysisRow(props) {
   function handlePrint(e) {
     e.stopPropagation();
     const formData = analysis.form_data || {};
-    const printWindow = window.open('', '_blank');
     
     // Helper function for gender display
     const genderDisplay = formData.gender ? (formData.gender === 'male' ? 'Male' : 'Female') : '-';
     
-    printWindow.document.write(`
+    // Build HTML as string (no document.write - XSS safe)
+    const htmlContent = `
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Profile Submission - ${analysis.profile_name}</title>
+        <title>Profile Submission - ${(analysis.profile_name || '').replace(/[<>"'&]/g, '')}</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body { font-family: 'Georgia', 'Times New Roman', serif; padding: 40px; color: #333; line-height: 1.6; max-width: 800px; margin: 0 auto; }
@@ -751,12 +751,9 @@ function AnalysisRow(props) {
         <script>window.onload = function() { window.print(); }</script>
       </body>
       </html>
-    `);
+    `;
     
-    // Secure approach: Use srcdoc instead of document.write to prevent XSS
-    const htmlContent = printWindow.document.documentElement.outerHTML;
-    printWindow.close();
-    
+    // Secure: Use iframe srcdoc directly (no document.write or window.open)
     const iframe = document.createElement('iframe');
     iframe.style.position = 'absolute';
     iframe.style.width = '0';
@@ -767,7 +764,6 @@ function AnalysisRow(props) {
     iframe.onload = function() {
       setTimeout(function() {
         iframe.contentWindow.print();
-        // Clean up after print dialog closes
         setTimeout(function() {
           if (document.body.contains(iframe)) {
             document.body.removeChild(iframe);

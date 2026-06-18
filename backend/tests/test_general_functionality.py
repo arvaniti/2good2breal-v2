@@ -9,11 +9,11 @@ import json
 
 BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://profile-check-9.preview.emergentagent.com')
 
-# Test credentials from test_credentials.md
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "admin2026"
-USER_EMAIL = "test@test.com"
-USER_PASSWORD = "Test1234!"
+# Test credentials from environment or test_credentials.md
+ADMIN_USERNAME = os.environ.get('TEST_ADMIN_USERNAME', 'admin')
+ADMIN_PASSWORD = os.environ.get('TEST_ADMIN_PASSWORD', 'admin2026')
+USER_EMAIL = os.environ.get('TEST_USER_EMAIL', 'test@test.com')
+USER_PASSWORD = os.environ.get('TEST_USER_PASSWORD', 'Test1234!')
 
 
 class TestHealthAndBasics:
