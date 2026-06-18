@@ -29,8 +29,8 @@ export const translations = {
           description: "Our advanced A.I. scans profiles for inconsistencies, stolen or inauthentic photos, and both common and complex scam patterns."
         },
         redFlags: {
-          title: "Red Flag Detection",
-          description: "Instantly spot warning signs with our comprehensive red flag identification system."
+          title: "Red-Flag Detection",
+          description: "Instantly spot warning signs with our comprehensive red-flag identification system."
         },
         scoring: {
           title: "Trust Scoring",
