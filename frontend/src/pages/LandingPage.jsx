@@ -309,28 +309,6 @@ export const LandingPage = () => {
             <p className="text-xl font-semibold text-white">{t('landing.about.filter')}</p>
           </div>
 
-          {/* Psychology Section - Scammer Types */}
-          <div className="mt-12 bg-red-950/20 border-2 border-red-800/50 rounded-2xl p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <UserX className="w-6 h-6 text-red-500" />
-              <h3 className="text-xl font-bold text-red-500">{t('landing.about.psychologyTitle')}</h3>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-red-950/30 border border-red-800/40 rounded-xl p-4 text-center">
-                <span className="text-red-400 font-semibold text-sm">{t('landing.about.scammer1')}</span>
-              </div>
-              <div className="bg-red-950/30 border border-red-800/40 rounded-xl p-4 text-center">
-                <span className="text-red-400 font-semibold text-sm">{t('landing.about.scammer2')}</span>
-              </div>
-              <div className="bg-red-950/30 border border-red-800/40 rounded-xl p-4 text-center">
-                <span className="text-red-400 font-semibold text-sm">{t('landing.about.scammer3')}</span>
-              </div>
-              <div className="bg-red-950/30 border border-red-800/40 rounded-xl p-4 text-center">
-                <span className="text-red-400 font-semibold text-sm">{t('landing.about.scammer4')}</span>
-              </div>
-            </div>
-          </div>
-
           {/* Trust Indicators */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="flex items-center gap-3 bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
