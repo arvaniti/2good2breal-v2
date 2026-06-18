@@ -251,7 +251,7 @@ export const LandingPage = () => {
                   "Boutique store fraudster"
                 ].map((type, i) => (
                   <div key={i} className="bg-red-950/20 border border-red-800/30 rounded-lg px-3 py-2.5 text-center">
-                    <span className="text-red-300 text-sm font-medium">{i + 1}. {type}</span>
+                    <span className="text-red-300 text-sm font-medium">{type}</span>
                   </div>
                 ))}
               </div>
