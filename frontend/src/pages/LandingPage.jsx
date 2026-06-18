@@ -127,7 +127,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Features Section - How We Protect You */}
-      <section id="features" className="py-24 sm:py-32">
+      <section id="features" className="py-24 sm:py-32 pb-12 sm:pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -203,7 +203,7 @@ export const LandingPage = () => {
       </section>
 
       {/* About Section - This Is Not A Dating Site (NOW AFTER FEATURES) */}
-      <section className="py-20 sm:py-28 bg-zinc-950">
+      <section className="py-12 sm:py-16 bg-zinc-950">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Badge */}
           <div className="text-center mb-12">
