@@ -225,9 +225,9 @@ export const LandingPage = () => {
 
             {/* Scammer Types Table */}
             <div className="bg-zinc-900/60 border border-red-800/30 rounded-2xl p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-5">
+              <div className="flex items-center justify-center gap-3 mb-5">
                 <AlertTriangle className="w-6 h-6 text-red-500" />
-                <h3 className="text-lg font-bold text-red-400">Scam types we identify</h3>
+                <h3 className="text-lg font-bold text-red-400">Scam Types We Identify</h3>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                 {[
