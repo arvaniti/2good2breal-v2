@@ -651,9 +651,7 @@ export const LandingPage = () => {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/33743660555?text=Hello%2C%20I%20am%20interested%20to%20make%20a%20personal%20enquiry%20and%20receive%20information%20about%20profile%20submission."
-        target="_blank"
-        rel="noopener noreferrer"
+        href="https://api.whatsapp.com/send?phone=33743660555&text=Hello%2C%20I%20am%20interested%20to%20make%20a%20personal%20enquiry%20and%20receive%20information%20about%20profile%20submission."
         data-testid="whatsapp-float-btn"
         className="fixed bottom-6 left-6 z-50 group"
         aria-label="Contact us on WhatsApp"
