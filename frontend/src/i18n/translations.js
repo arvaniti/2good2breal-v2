@@ -23,7 +23,7 @@ export const translations = {
       },
       features: {
         title: "How We Protect You",
-        subtitle: "Advanced verification tools to keep you safe",
+        subtitle: "Advanced verification tools that keep you safe",
         aiAnalysis: {
           title: "A.I. Powered Analysis",
           description: "Our advanced A.I. scans profiles for inconsistencies, stolen, inauthentic photos, common and complex scam patterns."
