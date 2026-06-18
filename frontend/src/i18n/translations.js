@@ -75,7 +75,7 @@ export const translations = {
         description3: "Without the experience, knowledge, and advanced technical understanding of today\u2019s technology\u2014including AI\u2011driven systems and social\u2011platform analysis\u2014it has become increasingly difficult to distinguish who is sincere and who is not in the dating world.",
         description4: "2good2breal focuses on helping distressed women and men who are unknowingly communicating with false profiles\u2014often impersonating military personnel, engineers, biologists, lawyers, surgeons, or individuals claiming to work in real estate and property development.",
         team: "Our team brings years of proven experience and success. At 2good2breal, we handle the entire process for you with confidence, professionalism, and complete discretion.",
-        confidence: "We, at \"2good2breal\" perform the task for you with confidence and full discretion.",
+        confidence: "",
         delivery: "Within 48 hours, our team will provide you with a completed and accurate, trusted dossier including an information score pertaining to your potential chosen profile.",
         result: "You will be relieved of these essential research complexities and progress rapidly in finding a suitable companion of your choice with complete confidence. Our senior consultants provide you confidential, one on one online and phone support within minutes between the hours of 9:00 am and 6:00 pm (CET), 6 days per week. For your first contact with our team, it's very simple: just send us a text message to one of our WhatsApp numbers briefly explaining your request. We'll receive it and call you back.",
         contactTitle: "CONTACT",
