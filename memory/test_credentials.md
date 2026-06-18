@@ -3,10 +3,7 @@
 ## Admin Account
 - Username: admin
 - Password: admin2026
-- Access: /admin dashboard
 
-## Regular User Account
-- Email: test@test.com
-- Password: Test1234!
-- Name: Test User
-- Access: /analyze submission wizard
+## Test User Account
+- Email: johanna112@gmail.com
+- Password: Johanna2026!

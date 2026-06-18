@@ -231,7 +231,8 @@ export const translations = {
         high: "High Trust",
         medium: "Medium Trust",
         low: "Low Trust",
-        very_low: "Very Low Trust"
+        very_low: "Very Low Trust",
+        pending: "Pending"
       },
       summary: "Summary",
       redFlags: {
@@ -541,7 +542,8 @@ export const translations = {
         high: "Confiance Élevée",
         medium: "Confiance Moyenne",
         low: "Confiance Faible",
-        very_low: "Confiance Très Faible"
+        very_low: "Confiance Très Faible",
+        pending: "En attente"
       },
       summary: "Résumé",
       redFlags: {
