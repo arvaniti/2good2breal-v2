@@ -648,6 +648,27 @@ export const LandingPage = () => {
           </div>
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/33743660555?text=Hello%2C%20I%20am%20interested%20to%20make%20a%20personal%20enquiry%20and%20receive%20information%20about%20profile%20submission."
+        target="_blank"
+        rel="noopener noreferrer"
+        data-testid="whatsapp-float-btn"
+        className="fixed bottom-6 left-6 z-50 group"
+        aria-label="Contact us on WhatsApp"
+      >
+        <div className="relative">
+          {/* Pulse ring */}
+          <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-30 animate-ping" />
+          {/* Button */}
+          <div className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-[#25D366]/50 hover:scale-110 transition-all duration-300 cursor-pointer">
+            <svg viewBox="0 0 32 32" className="w-7 h-7 fill-white">
+              <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.129 6.744 3.047 9.379L1.054 31.25l6.1-1.953A15.9 15.9 0 0 0 16.004 32C24.826 32 32 24.822 32 16.004 32 7.176 24.826 0 16.004 0zm9.338 22.617c-.387 1.09-1.922 1.996-3.137 2.262-.832.176-1.918.317-5.574-1.2-4.676-1.937-7.687-6.672-7.922-6.984-.226-.312-1.89-2.52-1.89-4.808 0-2.289 1.196-3.414 1.62-3.879.387-.422.918-.618 1.226-.618.152 0 .289.008.414.016.421.019.633.043 .91.707.348.832 1.196 2.91 1.3 3.121.105.215.2.496.063.793-.128.3-.24.488-.473.753-.234.266-.48.473-.714.762-.215.254-.457.527-.196.95.262.421 1.164 1.918 2.5 3.109 1.718 1.53 3.164 2.004 3.613 2.227.348.176.762.148.996-.09.3-.304.672-.809 1.05-1.31.27-.355.605-.398.984-.238.383.156 2.43 1.145 2.847 1.355.418.21.695.312.797.484.102.176.102.996-.285 2.09z"/>
+            </svg>
+          </div>
+        </div>
+      </a>
     </div>
   );
 };
