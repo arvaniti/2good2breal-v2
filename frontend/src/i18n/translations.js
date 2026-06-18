@@ -16,7 +16,7 @@ export const translations = {
     // Landing Page
     landing: {
       hero: {
-        title: "Verify Dating Profiles",
+        title: "Verify Dating Profiles with Confidence and Discretion",
         subtitle: "Stay safe while dating online. Our experts in profile researching & extensive A.I. operating systems guide you to identify fake profiles and potential scammers.",
         cta: "Get Started Free",
         ctaSecondary: "Learn More"
