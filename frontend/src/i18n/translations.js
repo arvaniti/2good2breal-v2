@@ -26,7 +26,7 @@ export const translations = {
         subtitle: "Advanced verification tools that keep you safe",
         aiAnalysis: {
           title: "A.I. Powered Analysis",
-          description: "Our advanced A.I. scans profiles for inconsistencies, stolen, inauthentic photos, common and complex scam patterns."
+          description: "Our advanced A.I. scans profiles for inconsistencies, stolen or inauthentic photos, and both common and complex scam patterns."
         },
         redFlags: {
           title: "Red Flag Detection",
