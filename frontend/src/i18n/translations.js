@@ -38,7 +38,7 @@ export const translations = {
         },
         filters: {
           title: "Custom Filters",
-          description: "Create personalized verification criteria based on your preferences."
+          description: "Personalised verification criteria based on your preferences."
         }
       },
       howItWorks: {
