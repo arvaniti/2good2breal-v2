@@ -77,7 +77,7 @@ export const translations = {
         team: "Our team brings years of proven experience and success. At 2good2breal, we handle the entire process for you with confidence, professionalism, and complete discretion.",
         confidence: "",
         delivery: "Within 48 hours, our team will deliver a complete, accurate, and trusted dossier, including an information score for your selected profile.",
-        result: "You will be relieved of these essential research complexities and progress rapidly in finding a suitable companion of your choice with complete confidence. Our senior consultants provide you confidential, one on one online and phone support within minutes between the hours of 9:00 am and 6:00 pm (CET), 6 days per week. For your first contact with our team, it's very simple: just send us a text message to one of our WhatsApp numbers briefly explaining your request. We'll receive it and call you back.",
+        result: "You will be relieved of the time\u2011consuming research and complexity, allowing you to move forward with confidence in finding a suitable companion. Our senior consultants offer confidential, one\u2011on\u2011one online and phone support within minutes, between 9:00 a.m. and 6:00 p.m. (CET), six days a week. Your first contact with our team is simple: send a brief WhatsApp message explaining your request, and we will receive it and call you back.",
         contactTitle: "CONTACT",
         contactWhatsApp: "WhatsApp 1   +33 (0) 7 43 66 05 55",
         contactOffice: "Office Line   +33 (0) 7 67 92 55 45",
