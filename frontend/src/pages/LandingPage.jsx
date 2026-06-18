@@ -222,6 +222,40 @@ export const LandingPage = () => {
             <p>{t('landing.about.description2')}</p>
             <p>{t('landing.about.description3')}</p>
             <p>{t('landing.about.description4')}</p>
+
+            {/* Scammer Types Table */}
+            <div className="bg-zinc-900/60 border border-red-800/30 rounded-2xl p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-5">
+                <AlertTriangle className="w-6 h-6 text-red-500" />
+                <h3 className="text-lg font-bold text-red-400">Types of Scammers We Detect</h3>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                {[
+                  "Romance manipulator",
+                  "Love bomber",
+                  "Sextortionist",
+                  "Fake investment / crypto mentor",
+                  "Health & Wellness subscription trapper",
+                  "Impersonator",
+                  "Retail fraudster",
+                  "Credential Fishing thief",
+                  "Charity scammer",
+                  "Caregiver fraudster",
+                  "Lifestyle / luxury fraudster",
+                  "Visa / immigration manipulator",
+                  "Identity thief",
+                  "Long-game groomer",
+                  "Fake celebrity",
+                  "Widowed parent",
+                  "Stranded abroad",
+                  "Boutique store fraudster"
+                ].map((type, i) => (
+                  <div key={i} className="bg-red-950/20 border border-red-800/30 rounded-lg px-3 py-2.5 text-center">
+                    <span className="text-red-300 text-sm font-medium">{i + 1}. {type}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
             
             <div className="py-6 border-y border-zinc-800">
               <p className="text-xl text-white font-semibold">{t('landing.about.delivery')}</p>
