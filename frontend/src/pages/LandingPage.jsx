@@ -31,7 +31,7 @@ const coupleImages = [
     alt: "Happy young couple embracing"
   },
   {
-    url: "https://static.prod-images.emergentagent.com/jobs/3b0bb19a-dfb7-4f27-b093-a7f016f93d48/images/a2a7908d74983cea4acc48401e45ca564d1047b6805164feeae9c456b8bf8c65.png",
+    url: "https://static.prod-images.emergentagent.com/jobs/3b0bb19a-dfb7-4f27-b093-a7f016f93d48/images/3cbc440583bcd5bae88ba03c3788261f208cbfe19264bce0f376836182a814d1.png",
     alt: "Elegant couple toasting at dinner"
   },
   {
