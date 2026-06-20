@@ -234,21 +234,23 @@ export const LandingPage = () => {
                   "Romance manipulator",
                   "Love bomber",
                   "Sextortionist",
-                  "Fake investment / crypto mentor",
+                  "Fake investment / Crypto mentor",
                   "Health & Wellness subscription trapper",
                   "Impersonator",
                   "Retail fraudster",
-                  "Credential Fishing thief",
-                  "Charity scammer",
-                  "Caregiver fraudster",
+                  "Credential phishing thief",
+                  "Charity / Donation scammer",
+                  "Caregiver / Healthcare worker fraudster",
                   "Lifestyle / luxury fraudster",
-                  "Visa / immigration manipulator",
+                  "Visa / Immigration manipulator",
                   "Identity thief",
                   "Long-game groomer",
                   "Fake celebrity",
                   "Widowed parent",
                   "Stranded abroad",
-                  "Boutique store fraudster"
+                  "Social media boutique shop fraudster",
+                  "Trauma / Bond Creator",
+                  "Gaslighter / Ghoster"
                 ].map((type, i) => (
                   <div key={i} className="bg-red-950/20 border border-red-800/30 rounded-lg px-3 py-2.5 text-center">
                     <span className="text-red-300 text-sm font-medium">{type}</span>
