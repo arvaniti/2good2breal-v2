@@ -27,7 +27,7 @@ import {
 // Couple images for illustration
 const coupleImages = [
   {
-    url: "https://static.prod-images.emergentagent.com/jobs/3b0bb19a-dfb7-4f27-b093-a7f016f93d48/images/366a184cdc2d0dbbb705e83fe64db423fdf3d8bfc48379043595165b7c1e6159.png",
+    url: "https://static.prod-images.emergentagent.com/jobs/3b0bb19a-dfb7-4f27-b093-a7f016f93d48/images/3e0f8f5d50af295888c0006e9216cde773f3046bbe1de546a46d41fea3ec06fd.png",
     alt: "Happy young couple embracing"
   },
   {

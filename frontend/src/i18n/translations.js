@@ -64,7 +64,7 @@ export const translations = {
       couples: {
         badge: "Real Connections",
         title: "We Verify & Vet Your Chosen Profiles",
-        subtitle: "We thoroughly verify profiles you choose from any dating platform worldwide",
+        subtitle: "We verify any profiles you select, on dating platforms or elsewhere",
         verified: "Verified Match"
       },
       about: {
