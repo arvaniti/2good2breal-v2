@@ -27,20 +27,20 @@ import {
 // Couple images for illustration
 const coupleImages = [
   {
-    url: "https://customer-assets.emergentagent.com/job_0b724c14-c97f-499b-b534-e1e0ccb2c8e2/artifacts/3vi1p925_Screenshot%202026-03-11%20at%2018.31.23.png",
+    url: "https://static.prod-images.emergentagent.com/jobs/3b0bb19a-dfb7-4f27-b093-a7f016f93d48/images/efe90620b1c2bcbc2fbde63d761a281f21912a788b64e21b19ef70075f914c04.png",
     alt: "Happy young couple embracing"
   },
   {
-    url: "https://customer-assets.emergentagent.com/job_70eab583-4996-47c5-9afc-5c9044f1456a/artifacts/ygie35w5_couple%202.PNG",
+    url: "https://static.prod-images.emergentagent.com/jobs/3b0bb19a-dfb7-4f27-b093-a7f016f93d48/images/07324546bb24148eaab8694602e29cb683a9991c098f8dfb88c48c0d7d50b3fb.png",
     alt: "Elegant couple toasting at dinner"
-  },
-  {
-    url: "https://images.pexels.com/photos/8096475/pexels-photo-8096475.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    alt: "Happy black couple sharing intimate moments"
   },
   {
     url: "https://customer-assets.emergentagent.com/job_70eab583-4996-47c5-9afc-5c9044f1456a/artifacts/psgcvyp7_couple.PNG",
     alt: "Happy mature couple embracing outdoors"
+  },
+  {
+    url: "https://images.pexels.com/photos/8096475/pexels-photo-8096475.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    alt: "Happy black couple sharing intimate moments"
   }
 ];
 
