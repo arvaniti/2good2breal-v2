@@ -287,7 +287,7 @@ function AnalysisRow(props) {
       if (onRefresh) onRefresh();
     })
     .catch(function(err) {
-      console.error(err);
+
       toast.error('Failed to delete submission');
     })
     .finally(function() {
@@ -316,7 +316,7 @@ function AnalysisRow(props) {
       window.URL.revokeObjectURL(url);
       toast.success('PDF downloaded successfully');
     } catch (err) {
-      console.error(err);
+
       toast.error('Failed to download PDF');
     }
   }
@@ -342,7 +342,7 @@ function AnalysisRow(props) {
       window.URL.revokeObjectURL(url);
       toast.success('DOCX downloaded successfully');
     } catch (err) {
-      console.error(err);
+
       toast.error('Failed to download DOCX');
     }
   }

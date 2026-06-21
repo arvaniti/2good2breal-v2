@@ -5,11 +5,6 @@ const AuthContext = createContext();
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
-// Log API URL in dev for debugging
-if (process.env.NODE_ENV === 'development' || !process.env.REACT_APP_BACKEND_URL) {
-  console.log('[Auth] API URL:', API);
-}
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem('token'));
@@ -24,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data);
         return response.data;
       } catch (error) {
-        console.error('Refresh user error:', error);
+
         return null;
       }
     }
@@ -40,7 +35,7 @@ export const AuthProvider = ({ children }) => {
           });
           setUser(response.data);
         } catch (error) {
-          console.error('Auth init error:', error);
+
           localStorage.removeItem('token');
           setToken(null);
           setUser(null);

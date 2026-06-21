@@ -129,7 +129,7 @@ export function ResultsPage() {
       const res = await axios.get(`${API}/analyses/${id}`, hdrs);
       setResult(res.data);
     } catch (err) {
-      console.error('Fetch error:', err);
+
       toast.error(t('common.error'));
       navigate('/dashboard');
     } finally {

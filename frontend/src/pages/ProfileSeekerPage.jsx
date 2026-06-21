@@ -46,9 +46,9 @@ export default function ProfileSeekerPage() {
       .catch(function() { toast.error('Delete failed'); });
   }
 
-  var filtered = profiles.filter(function(p) {
+  const filtered = profiles.filter(function(p) {
     if (!search) return true;
-    var q = search.toLowerCase();
+    const q = search.toLowerCase();
     return (p.first_name || '').toLowerCase().indexOf(q) >= 0 ||
       (p.last_name || '').toLowerCase().indexOf(q) >= 0 ||
       (p.address || '').toLowerCase().indexOf(q) >= 0;
@@ -88,7 +88,7 @@ export default function ProfileSeekerPage() {
         )
       : React.createElement('div', { className: 'space-y-3' },
           filtered.map(function(p) {
-            var pc = (p.photos || []).length;
+            const pc = (p.photos || []).length;
             return React.createElement('div', { key: p.id, className: 'border border-zinc-800 rounded-xl p-4 hover:border-purple-700/50 transition-colors cursor-pointer bg-zinc-900/50', onClick: function() { setSelected(p); setView('detail'); } },
               React.createElement('div', { className: 'flex items-center gap-4' },
                 React.createElement('div', { className: 'w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0 overflow-hidden' },
@@ -114,17 +114,17 @@ export default function ProfileSeekerPage() {
 }
 
 function NewForm(props) {
-  var formRef = useRef({ first_name: '', last_name: '', address: '', birth_date: '', birth_place: '', notes: '' });
-  var photosRef = useRef([]);
-  var fileRef = useRef(null);
-  var _f = useState(0); var tick = _f[1];
-  var _s = useState(false); var saving = _s[0]; var setSaving = _s[1];
+  const formRef = useRef({ first_name: '', last_name: '', address: '', birth_date: '', birth_place: '', notes: '' });
+  const photosRef = useRef([]);
+  const fileRef = useRef(null);
+  const _f = useState(0); const tick = _f[1];
+  const _s = useState(false); const saving = _s[0]; const setSaving = _s[1];
 
   function set(k, v) { formRef.current[k] = v; tick(function(n) { return n + 1; }); }
   function addPhotos(e) {
-    var files = Array.from(e.target.files || []);
+    const files = Array.from(e.target.files || []);
     files.forEach(function(file) {
-      var r = new FileReader();
+      const r = new FileReader();
       r.onload = function() { photosRef.current.push({ file: file, preview: r.result }); tick(function(n) { return n + 1; }); };
       r.readAsDataURL(file);
     });
@@ -137,9 +137,9 @@ function NewForm(props) {
     setSaving(true);
     axios.post(API + '/seeker/profiles', formRef.current, getHeaders())
       .then(function(res) {
-        var pid = res.data.id;
-        var uploads = photosRef.current.map(function(p) {
-          var fd = new FormData(); fd.append('photo', p.file);
+        const pid = res.data.id;
+        const uploads = photosRef.current.map(function(p) {
+          const fd = new FormData(); fd.append('photo', p.file);
           return axios.post(API + '/seeker/profiles/' + pid + '/photos', fd, getHeaders());
         });
         return Promise.all(uploads).then(function() { return axios.get(API + '/seeker/profiles/' + pid, getHeaders()); });
@@ -149,8 +149,8 @@ function NewForm(props) {
       .finally(function() { setSaving(false); });
   }
 
-  var f = formRef.current;
-  var photos = photosRef.current;
+  const f = formRef.current;
+  const photos = photosRef.current;
 
   return React.createElement('form', { onSubmit: submit, className: 'space-y-6' },
     React.createElement('div', { className: 'flex items-center gap-4' },
@@ -195,13 +195,13 @@ function NewForm(props) {
 }
 
 function Detail(props) {
-  var _e = useState(false); var editing = _e[0]; var setEditing = _e[1];
-  var _f = useState(props.profile); var form = _f[0]; var setForm = _f[1];
-  var _u = useState(false); var uploading = _u[0]; var setUploading = _u[1];
-  var _sr = useState(false); var searching = _sr[0]; var setSearching = _sr[1];
-  var _res = useState(null); var searchResult = _res[0]; var setSearchResult = _res[1];
-  var _poll = useRef(null);
-  var fileRef = useRef(null);
+  const _e = useState(false); const editing = _e[0]; const setEditing = _e[1];
+  const _f = useState(props.profile); const form = _f[0]; const setForm = _f[1];
+  const _u = useState(false); const uploading = _u[0]; const setUploading = _u[1];
+  const _sr = useState(false); const searching = _sr[0]; const setSearching = _sr[1];
+  const _res = useState(null); const searchResult = _res[0]; const setSearchResult = _res[1];
+  const _poll = useRef(null);
+  const fileRef = useRef(null);
 
   useEffect(function() { setForm(props.profile); setEditing(false); setSearchResult(null); return function() { if (_poll.current) clearInterval(_poll.current); }; }, [props.profile]);
 
@@ -213,7 +213,7 @@ function Detail(props) {
       search_types: ['web', 'image']
     }, getHeaders())
       .then(function(r) {
-        var searchId = r.data.search_id;
+        const searchId = r.data.search_id;
         // Poll for results
         _poll.current = setInterval(function() {
           axios.get(API + '/seeker/profiles/' + props.profile.id + '/search/' + searchId, getHeaders())
@@ -244,11 +244,11 @@ function Detail(props) {
   }
 
   function uploadPhoto(e) {
-    var files = e.target.files;
+    const files = e.target.files;
     if (!files || !files.length) return;
     setUploading(true);
-    var uploads = Array.from(files).map(function(file) {
-      var fd = new FormData(); fd.append('photo', file);
+    const uploads = Array.from(files).map(function(file) {
+      const fd = new FormData(); fd.append('photo', file);
       return axios.post(API + '/seeker/profiles/' + props.profile.id + '/photos', fd, getHeaders());
     });
     Promise.all(uploads)
@@ -266,12 +266,12 @@ function Detail(props) {
   }
 
   function printResults() {
-    var name = (form.first_name || '') + ' ' + (form.last_name || '');
-    var sr = latestSearch;
+    const name = (form.first_name || '') + ' ' + (form.last_name || '');
+    const sr = latestSearch;
     if (!sr || !sr.results) { toast.error('No results to print'); return; }
-    var r = sr.results;
-    var a = r.ai_analysis || {};
-    var html = '<!DOCTYPE html><html><head><title>Investigation Report - ' + name + '</title><style>' +
+    const r = sr.results;
+    const a = r.ai_analysis || {};
+    const html = '<!DOCTYPE html><html><head><title>Investigation Report - ' + name + '</title><style>' +
       'body{font-family:Arial,sans-serif;padding:40px;max-width:900px;margin:0 auto;color:#333;font-size:12px;}' +
       'h1{font-size:20px;border-bottom:2px solid #7c3aed;padding-bottom:8px;}' +
       'h2{font-size:14px;color:#7c3aed;margin-top:20px;}' +
@@ -300,16 +300,16 @@ function Detail(props) {
       '<div class="footer"><p>Generated by 2good2breal Profile Seeker | ' + new Date().toLocaleString() + '</p></div>' +
       '</body></html>';
     
-    var iframe = document.createElement('iframe');
+    const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     document.body.appendChild(iframe);
     iframe.srcdoc = html;
     iframe.onload = function() { iframe.contentWindow.print(); setTimeout(function() { document.body.removeChild(iframe); }, 1000); };
   }
 
-  var photos = form.photos || [];
-  var latestSearch = searchResult || (form.search_results && form.search_results.length > 0 ? form.search_results[form.search_results.length - 1] : null);
-  var ai = latestSearch && latestSearch.results ? latestSearch.results.ai_analysis : null;
+  const photos = form.photos || [];
+  const latestSearch = searchResult || (form.search_results && form.search_results.length > 0 ? form.search_results[form.search_results.length - 1] : null);
+  const ai = latestSearch && latestSearch.results ? latestSearch.results.ai_analysis : null;
 
   function riskColor(level) {
     if (level === 'critical') return 'bg-red-500/20 text-red-400';
@@ -333,8 +333,8 @@ function Detail(props) {
       latestSearch && latestSearch.results ? React.createElement(Button, { size: 'sm', variant: 'outline', onClick: function() {
         axios.get(API + '/seeker/profiles/' + props.profile.id + '/report-pdf', Object.assign({}, getHeaders(), { responseType: 'blob' }))
           .then(function(res) {
-            var url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
-            var a = document.createElement('a'); a.href = url;
+            const url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+            const a = document.createElement('a'); a.href = url;
             a.download = 'investigation_' + (form.first_name || '') + '_' + (form.last_name || '') + '.pdf';
             a.click(); window.URL.revokeObjectURL(url);
             toast.success('PDF downloaded');
@@ -390,11 +390,11 @@ function Detail(props) {
         React.createElement(CardHeader, null, React.createElement(CardTitle, { className: 'text-white text-base' }, 'Information')),
         React.createElement(CardContent, { className: 'space-y-3' },
           ['first_name', 'last_name', 'address', 'birth_date', 'birth_place'].map(function(k) {
-            var label = k.replace('_', ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+            const label = k.replace('_', ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
             return React.createElement('div', { key: k, className: 'space-y-1' },
               React.createElement(Label, { className: 'text-zinc-400 text-xs' }, label),
               editing
-                ? React.createElement(Input, { value: form[k] || '', onChange: function(e) { setForm(function(f) { var n = Object.assign({}, f); n[k] = e.target.value; return n; }); }, className: 'bg-zinc-800/50 border-zinc-700 text-white' })
+                ? React.createElement(Input, { value: form[k] || '', onChange: function(e) { setForm(function(f) { const n = Object.assign({}, f); n[k] = e.target.value; return n; }); }, className: 'bg-zinc-800/50 border-zinc-700 text-white' })
                 : React.createElement('p', { className: 'text-white' }, form[k] || '-')
             );
           }),

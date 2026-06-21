@@ -86,6 +86,9 @@ async def create_checkout(request: Request, checkout_data: CreateCheckoutRequest
         logger.error(f"Stripe checkout creation failed: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to create checkout session: {str(e)}")
 
+    if not session:
+        raise HTTPException(status_code=500, detail="Stripe session creation returned empty response")
+
     transaction = {
         "id": str(uuid.uuid4()),
         "session_id": session.id,
