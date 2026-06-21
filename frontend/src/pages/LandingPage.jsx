@@ -285,11 +285,21 @@ export const LandingPage = () => {
               <div className="mt-3 pt-3 border-t border-zinc-700">
                 <p className="text-zinc-400 text-sm mb-2">{isFr ? "Langues parlées par notre équipe :" : "Languages spoken by our team:"}</p>
                 <div className="flex flex-wrap gap-3">
-                  <span className="flex items-center justify-center bg-zinc-700/50 px-3 py-2 rounded text-2xl">🇬🇧</span>
-                  <span className="flex items-center justify-center bg-zinc-700/50 px-3 py-2 rounded text-2xl">🇫🇷</span>
-                  <span className="flex items-center justify-center bg-zinc-700/50 px-3 py-2 rounded text-2xl">🇮🇹</span>
-                  <span className="flex items-center justify-center bg-zinc-700/50 px-3 py-2 rounded text-2xl">🇪🇸</span>
-                  <span className="flex items-center justify-center bg-zinc-700/50 px-3 py-2 rounded text-2xl">🇬🇷</span>
+                  <span className="flex items-center gap-1.5 bg-zinc-700/50 px-2 py-1 rounded text-sm text-zinc-300">
+                    <span className="text-base">🇬🇧</span> English
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-zinc-700/50 px-2 py-1 rounded text-sm text-zinc-300">
+                    <span className="text-base">🇫🇷</span> Français
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-zinc-700/50 px-2 py-1 rounded text-sm text-zinc-300">
+                    <span className="text-base">🇮🇹</span> Italiano
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-zinc-700/50 px-2 py-1 rounded text-sm text-zinc-300">
+                    <span className="text-base">🇪🇸</span> Español
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-zinc-700/50 px-2 py-1 rounded text-sm text-zinc-300">
+                    <span className="text-base">🇬🇷</span> Ελληνικά
+                  </span>
                 </div>
               </div>
             </div>
