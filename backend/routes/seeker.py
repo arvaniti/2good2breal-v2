@@ -218,6 +218,30 @@ async def seeker_search_profile(profile_id: str, data: SeekerSearchRequest, admi
                 social = await asyncio.to_thread(lambda: GoogleSearch({"engine": "google", "q": social_q, "api_key": SERPAPI_KEY, "num": 10}).get_dict())
                 for r in social.get("organic_results", []):
                     results["web_results"].append({"title": r.get("title", ""), "link": r.get("link", ""), "snippet": r.get("snippet", ""), "source": r.get("displayed_link", ""), "is_social": True})
+
+                # Dating platforms search
+                dating_q = f"{name} site:match.com OR site:meetic.fr OR site:meetic.com OR site:millionairematch.com OR site:cupid.com OR site:okcupid.com OR site:tinder.com OR site:bumble.com OR site:badoo.com OR site:happn.com"
+                search_queries_used.append(dating_q)
+                dating = await asyncio.to_thread(lambda: GoogleSearch({"engine": "google", "q": dating_q, "api_key": SERPAPI_KEY, "num": 10}).get_dict())
+                for r in dating.get("organic_results", []):
+                    results["web_results"].append({"title": r.get("title", ""), "link": r.get("link", ""), "snippet": r.get("snippet", ""), "source": r.get("displayed_link", ""), "is_dating": True})
+
+                # Truecaller / phone lookup search
+                phone = profile.get('phone', '') or profile.get('notes', '')
+                if phone:
+                    phone_q = f"{name} site:truecaller.com OR site:sync.me OR site:whocalledme.com"
+                    search_queries_used.append(phone_q)
+                    phone_results = await asyncio.to_thread(lambda: GoogleSearch({"engine": "google", "q": phone_q, "api_key": SERPAPI_KEY, "num": 5}).get_dict())
+                    for r in phone_results.get("organic_results", []):
+                        results["web_results"].append({"title": r.get("title", ""), "link": r.get("link", ""), "snippet": r.get("snippet", ""), "source": r.get("displayed_link", ""), "is_phone": True})
+
+                # Scam databases search
+                scam_q = f"{name} site:romancescams.org OR site:scamadviser.com OR site:scamwatch.gov.au OR \"romance scam\""
+                search_queries_used.append(scam_q)
+                scam = await asyncio.to_thread(lambda: GoogleSearch({"engine": "google", "q": scam_q, "api_key": SERPAPI_KEY, "num": 5}).get_dict())
+                for r in scam.get("organic_results", []):
+                    results["web_results"].append({"title": r.get("title", ""), "link": r.get("link", ""), "snippet": r.get("snippet", ""), "source": r.get("displayed_link", ""), "is_scam_db": True})
+
                 logger.info(f"Web search done: {len(results['web_results'])} results")
             except Exception as e:
                 logger.error(f"Web search failed: {e}")
@@ -237,8 +261,18 @@ async def seeker_search_profile(profile_id: str, data: SeekerSearchRequest, admi
                         image_url = f"{backend_url}/api/seeker/temp-photo/{photo_filename}"
                         lens = await asyncio.to_thread(lambda url=image_url: GoogleSearch({"engine": "google_lens", "url": url, "api_key": SERPAPI_KEY}).get_dict())
                         matches = [{"title": m.get("title", ""), "link": m.get("link", ""), "source": m.get("source", ""), "thumbnail": m.get("thumbnail", "")} for m in lens.get("visual_matches", [])]
-                        results["image_results"].append({"photo_index": idx, "matches_count": len(matches), "matches": matches[:10]})
-                        logger.info(f"Image search photo {idx}: {len(matches)} matches")
+                        results["image_results"].append({"photo_index": idx, "search_engine": "google_lens", "matches_count": len(matches), "matches": matches[:10]})
+                        logger.info(f"Google Lens photo {idx}: {len(matches)} matches")
+
+                        # TinEye reverse image search via SerpAPI
+                        try:
+                            tineye = await asyncio.to_thread(lambda url=image_url: GoogleSearch({"engine": "google_reverse_image", "image_url": url, "api_key": SERPAPI_KEY}).get_dict())
+                            tineye_matches = [{"title": m.get("title", ""), "link": m.get("link", ""), "source": m.get("source", ""), "thumbnail": m.get("thumbnail", "")} for m in tineye.get("image_results", [])]
+                            if tineye_matches:
+                                results["image_results"].append({"photo_index": idx, "search_engine": "google_reverse_image", "matches_count": len(tineye_matches), "matches": tineye_matches[:10]})
+                                logger.info(f"Reverse image photo {idx}: {len(tineye_matches)} matches")
+                        except Exception as te:
+                            logger.warning(f"Reverse image search photo {idx} failed: {te}")
                     except Exception as e:
                         logger.error(f"Image search photo {idx} failed: {e}")
                         results["image_results"].append({"photo_index": idx, "error": str(e), "matches": []})
@@ -254,14 +288,16 @@ async def seeker_search_profile(profile_id: str, data: SeekerSearchRequest, admi
 
 Profile: Address={profile.get('address', 'N/A')}, Birth={profile.get('birth_date', 'N/A')}, Notes={profile.get('notes', 'N/A')}
 
-Web results:
+Web results (includes social media, dating platforms, phone lookups, scam databases):
 {web_summary or 'No results'}
 
-Image results:
+Image results (Google Lens + Google Reverse Image Search):
 {img_summary or 'No image matches'}
 
+Sources searched: Google, LinkedIn, Facebook, Instagram, Twitter, Match.com, Meetic, MillionaireMatch, Cupid, OkCupid, Tinder, Bumble, Badoo, Happn, Truecaller, Sync.me, RomanceScams.org, ScamAdviser, Google Lens, Google Reverse Image.
+
 Respond ONLY with valid JSON:
-{{"identity_verified": true/false, "risk_level": "low"/"medium"/"high"/"critical", "online_presence_score": 0-100, "social_media_found": [], "suspicious_findings": [], "positive_findings": [], "image_reuse_detected": true/false, "image_reuse_details": "", "recommendation": "", "summary": ""}}"""
+{{"identity_verified": true/false, "risk_level": "low"/"medium"/"high"/"critical", "online_presence_score": 0-100, "social_media_found": [], "dating_platforms_found": [], "phone_lookup_results": [], "scam_database_hits": [], "suspicious_findings": [], "positive_findings": [], "image_reuse_detected": true/false, "image_reuse_details": "", "recommendation": "", "summary": ""}}"""
 
             chat = LlmChat(api_key=EMERGENT_LLM_KEY, session_id=f"seeker-{uuid.uuid4()}", system_message="Expert OSINT investigator. JSON only.").with_model("gemini", "gemini-3-flash-preview")
             resp = await chat.send_message(UserMessage(text=ai_prompt))
