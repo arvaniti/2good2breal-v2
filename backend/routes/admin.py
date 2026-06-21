@@ -27,12 +27,11 @@ router = APIRouter()
 
 @router.post("/admin/login", response_model=AdminTokenResponse)
 async def admin_login(credentials: AdminLogin):
-    admin_count = await db.admin_users.count_documents({})
-    if admin_count == 0:
-        try:
-            await seed_admin_user()
-        except Exception as e:
-            logger.error(f"Auto-seed admin failed: {e}")
+    # Always sync admin credentials with env vars (critical for serverless cold starts)
+    try:
+        await seed_admin_user()
+    except Exception as e:
+        logger.error(f"Auto-seed admin failed: {e}")
 
     admin = await db.admin_users.find_one({"username": credentials.username})
     if not admin:
