@@ -364,8 +364,7 @@ export function CookiesPage() {
                 </p>
                 <ul className="list-disc list-inside text-zinc-400 space-y-1 ml-2">
                   <li>Email: <a href="mailto:contact@2good2breal.com" className="text-purple-400 hover:text-purple-300 underline">contact@2good2breal.com</a></li>
-                  <li>WhatsApp 1 : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a></li>
-                  <li>WhatsApp 2 : <a href="tel:+33767925545" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 67 92 55 45</a></li>
+                  <li>WhatsApp : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a></li>
                 </ul>
               </div>
             }

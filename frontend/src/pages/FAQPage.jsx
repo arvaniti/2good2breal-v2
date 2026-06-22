@@ -92,8 +92,8 @@ const FAQPage = () => {
         ? "Comment puis-je vous contacter pour plus d'informations ?" 
         : "How can I contact you for more information?",
       answer: isFr
-        ? "Vous pouvez nous contacter par email à contact@2good2breal.com ou par téléphone au +33 (0) 7 67 92 55 45 (Bureau) / +33 (0) 7 43 66 05 55 (WhatsApp). Notre équipe répond généralement dans les 24 heures. Pour les questions urgentes concernant une vérification en cours, veuillez inclure votre numéro de référence dans votre message."
-        : "You can contact us by email at contact@2good2breal.com or by phone at +33 (0) 7 67 92 55 45 (Office) / +33 (0) 7 43 66 05 55 (WhatsApp). Our team will respond within 24 hours. For urgent questions regarding an ongoing verification, please include your reference number in your message."
+        ? "Vous pouvez nous contacter par email à contact@2good2breal.com ou par WhatsApp au +33 (0) 7 43 66 05 55. Notre équipe répond généralement dans les 24 heures. Pour les questions urgentes concernant une vérification en cours, veuillez inclure votre numéro de référence dans votre message."
+        : "You can contact us by email at contact@2good2breal.com or by WhatsApp at +33 (0) 7 43 66 05 55. Our team will respond within 24 hours. For urgent questions regarding an ongoing verification, please include your reference number in your message."
     },
     {
       icon: CreditCard,
@@ -160,9 +160,7 @@ const FAQPage = () => {
           </div>
           <div className="text-zinc-400 text-sm space-y-1">
             <p>
-              WhatsApp 1 : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a>
-              {" | "}
-              WhatsApp 2 : <a href="tel:+33767925545" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 67 92 55 45</a>
+              WhatsApp : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a>
             </p>
           </div>
         </div>

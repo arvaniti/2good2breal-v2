@@ -68,8 +68,7 @@ export function CGVPage() {
                 <li>• {isFr ? "Statut" : "Status"}: SAS - Société par Actions Simplifiée</li>
                 <li>• SIRET: [{isFr ? "À compléter" : "To be completed"}]</li>
                 <li>• Contact: {isFr ? "Référez-vous au formulaire de contact" : "Refer to Contact form"}</li>
-                <li>• WhatsApp 1 : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a></li>
-                <li>• WhatsApp 2 : <a href="tel:+33767925545" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 67 92 55 45</a></li>
+                <li>• WhatsApp : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a></li>
               </ul>
             </div>
           </div>
