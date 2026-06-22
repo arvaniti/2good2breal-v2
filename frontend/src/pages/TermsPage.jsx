@@ -242,10 +242,8 @@ Nos rapports de vérification sont fournis pour votre usage personnel uniquement
             title={isEnglish ? "9. Governing Law and Jurisdiction" : "9. Droit Applicable et Juridiction"}
             content={isEnglish 
               ? `These Terms and Conditions shall be governed by and construed in accordance with the laws of the European Union and the applicable national laws.
-
 Any disputes arising out of or related to these terms or our services shall be subject to the exclusive jurisdiction of the courts in the applicable jurisdiction.`
               : `Ces Conditions Générales sont régies par et interprétées conformément aux lois de l'Union Européenne et aux lois nationales applicables.
-
 Tout litige découlant de ces conditions ou de nos services sera soumis à la juridiction exclusive des tribunaux de la juridiction applicable.`
             }
           />
