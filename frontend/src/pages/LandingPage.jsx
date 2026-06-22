@@ -279,6 +279,9 @@ export const LandingPage = () => {
               <p className="text-zinc-300 -ml-2">
                 WhatsApp : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a>
               </p>
+              <p className="text-zinc-300 -ml-2">
+                Email : <a href="mailto:contact@2good2breal.com" className="text-purple-400 hover:text-purple-300 underline">contact@2good2breal.com</a>
+              </p>
               <div className="mt-3 pt-3 border-t border-zinc-700">
                 <p className="text-zinc-400 text-sm mb-2">{isFr ? "Langues parlées par notre équipe :" : "Languages spoken by our team:"}</p>
                 <div className="flex flex-wrap gap-3">
