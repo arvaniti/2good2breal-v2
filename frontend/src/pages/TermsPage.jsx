@@ -232,10 +232,8 @@ For complete details, please refer to our Privacy Policy.`
             title={isEnglish ? "8. Intellectual Property" : "8. Propriété Intellectuelle"}
             content={isEnglish 
               ? `All content, features, and functionality of our website and services, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, and software are the exclusive property of 2good2breal and are protected by international copyright, trademark, and other intellectual property laws.
-
 Our verification reports are provided for your personal use only and may not be reproduced, distributed, or commercially exploited without our express written consent.`
               : `Tout le contenu, les fonctionnalités et les fonctions de notre site web et de nos services sont la propriété exclusive de 2good2breal et sont protégés par les lois internationales sur les droits d'auteur et les marques.
-
 Nos rapports de vérification sont fournis pour votre usage personnel uniquement et ne peuvent être reproduits, distribués ou exploités commercialement sans notre consentement écrit exprès.`
             }
           />
