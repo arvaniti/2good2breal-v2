@@ -142,12 +142,12 @@ Tous les frais sont dus lors de la soumission de votre demande de vérification.
             title={isEnglish ? "4. User Responsibilities" : "4. Responsabilités de l'Utilisateur"}
             content={isEnglish 
               ? `By using our services, you agree to:
-• Provide accurate information for your verification requests
-• Any misuse, redistribution or commercial exploitation of our verification reports is prohibited
-• Maintain confidentiality of your account credentials
-• Comply with all applicable laws and regulations
+• Provide accurate information for all verification requests
+• Refrain from misuse or redistribution of our verification reports, including any commercial exploitation
+• Maintain the confidentiality of your account credentials
+• Comply with applicable laws and regulations
 
-You acknowledge you are solely responsible for any decisions, communications and meetings you proceed with this profile based on our verification reports.`
+You acknowledge that you are solely responsible for any decisions, communications, or meetings you choose to pursue with a profile, even when based on our verification reports.`
               : `En utilisant nos services, vous acceptez de :
 • Fournir des informations exactes pour vos demandes de vérification
 • Toute utilisation abusive, redistribution ou exploitation commerciale de nos rapports de vérification est interdite
