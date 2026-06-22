@@ -1,6 +1,6 @@
 import React from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { LanguageProvider } from "./i18n/LanguageContext";
@@ -24,6 +24,15 @@ import FAQPage from "./pages/FAQPage";
 import RefundRequestPage from "./pages/RefundRequestPage";
 import { PromotionPage } from "./pages/PromotionPage";
 import CookieConsent from "./components/CookieConsent";
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -142,6 +151,7 @@ function App() {
       <LanguageProvider>
         <AuthProvider>
           <BrowserRouter>
+            <ScrollToTop />
             <AppRoutes />
           </BrowserRouter>
           <Toaster 
