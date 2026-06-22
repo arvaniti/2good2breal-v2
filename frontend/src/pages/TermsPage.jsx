@@ -165,17 +165,23 @@ Vous reconnaissez être seul responsable de toutes décisions, communications et
 
 To the maximum extent permitted by applicable law:
 
-a) GUARANTEE OF ACCURACY: While we strive to provide precise and thorough verification services, we cannot guarantee 100 % accuracy of information contained in our reports. Our team's assessments are advanced, skilled researches, using only the highest level of technologies based on uncovering even the most difficult and secured profile data. Our profile analyzation and verification systems are at the utmost forefront and advanced level of analysis, however should not be considered infallible.
+a) Guarantee of Accuracy
+While we strive to provide precise and thorough verification services, we cannot guarantee 100% accuracy of the information contained in our reports. Our assessments are based on advanced investigative methods and high‑level technologies designed to uncover even the most difficult and secured profile data. Our verification systems are highly sophisticated and at the forefront of analysis, but they should not be considered infallible.
 
-b) NO LIABILITY FOR DECISIONS: 2good2breal shall not be held liable for any decision making or actions you take based on our verification reports. We provide information and analysis; the decision to proceed with or terminate any relationship is solely yours.
+b) No Liability for Decisions
+2good2breal shall not be held liable for any decisions or actions you take based on our verification reports. We provide information and analysis; the choice to proceed with or discontinue any interaction or relationship remains solely yours.
 
-c) LIMITATION OF DAMAGES: Under no circumstances shall 2good2breal, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
+c) Limitation of Damages
+Under no circumstances shall 2good2breal, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, consequential, or punitive damages, including but not limited to loss of profits, data, use, goodwill, or other intangible losses.
 
-d) MAXIMUM LIABILITY: In any event, our total liability to you for all claims arising from or related to our services shall not exceed the amount you paid to us for the specific service giving rise to the claim.
+d) Maximum Liability
+In any event, our total liability to you for all claims arising from or related to our services shall not exceed the amount you paid for the specific service giving rise to the claim.
 
-e) THIRD-PARTY PLATFORMS: We are not responsible for the accuracy of information obtained by you from third-party dating platforms or social media sites. Our analysis and verifications are exclusively based on the information and data you provide.
+e) Third‑Party Platforms
+We are not responsible for the accuracy of information obtained from third‑party dating platforms or social media sites. Our analysis and verifications are based exclusively on the information and data you provide.
 
-f) ADVISORY SERVICES: 2good2breal does not constitute legal, psychological, relationship or counseling guidance. For specific concerns in these areas, please consult qualified professionals.`
+f) Advisory Services
+2good2breal does not provide legal, psychological, relationship, or counseling advice. For concerns in these areas, please consult qualified professionals.`
               : `IMPORTANT : VEUILLEZ LIRE CETTE SECTION ATTENTIVEMENT.
 
 Dans la mesure maximale permise par la loi applicable :
