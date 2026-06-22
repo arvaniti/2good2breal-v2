@@ -88,7 +88,7 @@ BASIC VERIFICATION - €49 per profile
 • Trust score assessment
 • Red flag detection
 • 48-hour delivery
-• Personal consultation via WhatsApp, Zoom, or Direct phone call
+• Personal consultation via WhatsApp or Direct phone call
 • Standard dossier report
 
 COMPREHENSIVE VERIFICATION - €99 per profile
@@ -99,7 +99,7 @@ COMPREHENSIVE VERIFICATION - €99 per profile
 • Social media cross-referencing
 • Detailed dossier report
 • Priority 24-hour delivery
-• Personal consultation via WhatsApp, Zoom, or Direct phone call
+• Personal consultation via WhatsApp or Direct phone call
 
 PREMIUM PACKAGE - €189 (up to 2 profiles)
 • All COMPREHENSIVE VERIFICATION features
@@ -107,7 +107,7 @@ PREMIUM PACKAGE - €189 (up to 2 profiles)
 • Trust score assessment
 • Direct Premium Member Contact line
 • Priority support
-• Personal consultation via WhatsApp, Zoom, or Direct phone call
+• Personal consultation via WhatsApp or Direct phone call
 
 All fees are due upon submission of your verification request. Payments are processed securely and are non-refundable once the verification process has begun. We reserve the right to modify our pricing at any time, with notice provided to registered users.`
               : `Nos frais de service sont structurés comme suit :
@@ -117,7 +117,7 @@ VÉRIFICATION BASIQUE - 49€ par profil
 • Évaluation du score de confiance
 • Détection basique des signaux d'alerte
 • Livraison en 48 heures
-• Consultation personnelle via WhatsApp, Zoom ou appel téléphonique direct
+• Consultation personnelle via WhatsApp ou appel téléphonique direct
 
 VÉRIFICATION COMPLÈTE - 99€ par profil
 • Investigation approfondie du profil
@@ -125,14 +125,14 @@ VÉRIFICATION COMPLÈTE - 99€ par profil
 • Vérification croisée des réseaux sociaux
 • Rapport détaillé
 • Livraison prioritaire en 24 heures
-• Consultation personnelle via WhatsApp, Zoom ou appel téléphonique direct
+• Consultation personnelle via WhatsApp ou appel téléphonique direct
 
 FORFAIT PREMIUM - 189€ (jusqu'à 3 profils)
 • Toutes les fonctionnalités Complètes
 • Surveillance continue (30 jours)
 • Consultation directe avec nos experts
 • Support prioritaire
-• Consultation personnelle via WhatsApp, Zoom ou appel téléphonique direct
+• Consultation personnelle via WhatsApp ou appel téléphonique direct
 
 Tous les frais sont dus lors de la soumission de votre demande de vérification. Les paiements sont traités de manière sécurisée et ne sont pas remboursables une fois le processus de vérification commencé.`
             }
