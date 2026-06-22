@@ -88,7 +88,7 @@ BASIC VERIFICATION - €49 per profile
 • Trust score assessment
 • Red flag detection
 • 48-hour delivery
-• Personal consultation via WhatsApp, Zoom, or direct phone call
+• Personal consultation via WhatsApp, Zoom, or Direct phone call
 • Standard dossier report
 
 COMPREHENSIVE VERIFICATION - €99 per profile
@@ -99,7 +99,7 @@ COMPREHENSIVE VERIFICATION - €99 per profile
 • Social media cross-referencing
 • Detailed dossier report
 • Priority 24-hour delivery
-• Personal consultation via WhatsApp, Zoom, or direct phone call
+• Personal consultation via WhatsApp, Zoom, or Direct phone call
 
 PREMIUM PACKAGE - €189 (up to 2 profiles)
 • All COMPREHENSIVE VERIFICATION features
@@ -107,7 +107,7 @@ PREMIUM PACKAGE - €189 (up to 2 profiles)
 • Trust score assessment
 • Direct Premium Member Contact line
 • Priority support
-• Personal consultation via WhatsApp, Zoom, or direct phone call
+• Personal consultation via WhatsApp, Zoom, or Direct phone call
 
 All fees are due upon submission of your verification request. Payments are processed securely and are non-refundable once the verification process has begun. We reserve the right to modify our pricing at any time, with notice provided to registered users.`
               : `Nos frais de service sont structurés comme suit :
