@@ -300,6 +300,9 @@ export const LandingPage = () => {
                   <span className="flex items-center gap-1.5 bg-zinc-700/50 px-2 py-1 rounded text-sm text-zinc-300">
                     <span className="text-base">🇬🇷</span> Ελληνικά
                   </span>
+                  <span className="flex items-center gap-1.5 bg-zinc-700/50 px-2 py-1 rounded text-sm text-zinc-300">
+                    <span className="text-base">🇩🇪</span> Deutsch
+                  </span>
                 </div>
               </div>
             </div>
