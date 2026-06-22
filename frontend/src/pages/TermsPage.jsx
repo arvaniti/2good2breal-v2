@@ -269,8 +269,7 @@ Votre utilisation continue de nos services après de telles modifications consti
                 : "Si vous avez des questions concernant ces Conditions Générales, veuillez nous contacter à :"}</p>
               <ul className="space-y-2 ml-4">
                 <li>• Email: <a href="mailto:contact@2good2breal.com" className="text-purple-400 hover:text-purple-300 underline">contact@2good2breal.com</a></li>
-                <li>• WhatsApp 1 : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a></li>
-                <li>• WhatsApp 2 : <a href="tel:+33767925545" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 67 92 55 45</a></li>
+                <li>• WhatsApp : <a href="tel:+33743660555" className="text-purple-400 hover:text-purple-300 underline">+33 (0) 7 43 66 05 55</a></li>
               </ul>
               <p className="mt-4 text-zinc-400">{isEnglish 
                 ? "We aim to respond to all inquiries within 48 business hours."
