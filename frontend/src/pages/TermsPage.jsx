@@ -49,7 +49,7 @@ export function TermsPage() {
             content={isEnglish 
               ? `Welcome to 2good2breal. The Terms and Conditions govern your use of our profile verification services and website. By accessing or using our services, you agree to these terms.
 
-2good2breal is a professional profile verification service. We are NOT a dating site. We provide independent verification and vetting services for profiles from all dating platforms and all websites globally.`
+2good2breal is a professional profile‑verification service. We are not a dating site. We provide independent verification and vetting of profiles from all dating platforms — as well as from any other website — worldwide.`
               : `Bienvenue sur 2good2breal ("nous," "notre," ou "nos"). Ces Conditions Générales régissent votre utilisation de nos services de vérification de profils et de notre site web. En accédant ou en utilisant nos services, vous acceptez ces conditions.
 
 2good2breal est un service professionnel de vérification de profils. Nous ne sommes PAS un site de rencontres. Nous fournissons des services indépendants de vérification pour les profils provenant de toutes les plateformes et sites de rencontres.`
