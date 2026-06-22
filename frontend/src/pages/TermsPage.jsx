@@ -252,10 +252,8 @@ Tout litige découlant de ces conditions ou de nos services sera soumis à la ju
             title={isEnglish ? "10. Changes to Terms" : "10. Modifications des Conditions"}
             content={isEnglish 
               ? `We reserve the right to modify or replace these Terms and Conditions at any time at our sole discretion. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect.
-
 Your continued use of our services after any such changes constitutes your acceptance of the new Terms and Conditions.`
               : `Nous nous réservons le droit de modifier ces Conditions Générales à tout moment à notre seule discrétion. Si une révision est importante, nous fournirons un préavis d'au moins 30 jours avant l'entrée en vigueur des nouvelles conditions.
-
 Votre utilisation continue de nos services après de telles modifications constitue votre acceptation des nouvelles Conditions Générales.`
             }
           />
