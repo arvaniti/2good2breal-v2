@@ -105,7 +105,7 @@ PREMIUM PACKAGE - €189 (up to 2 profiles)
 • All COMPREHENSIVE VERIFICATION features
 • Monitoring of your profile for 30 days
 • Trust score assessment
-• Direct communication with our experts
+• Direct Premium Member Contact line
 • Priority support
 • Personal consultation via WhatsApp, Zoom, or direct phone call
 
