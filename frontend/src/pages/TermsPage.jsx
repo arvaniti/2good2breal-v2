@@ -204,10 +204,8 @@ f) AUCUN CONSEIL PROFESSIONNEL : Nos services ne constituent pas des conseils ju
             title={isEnglish ? "6. Disclaimer of Warranties" : "6. Exclusion de Garanties"}
             content={isEnglish 
               ? `Our services are provided on an "AS IS" and "AS AVAILABLE" basis, without any warranties of any kind, either expressed or implied. To maintain our confidential and loyal subscriber network, 2good2breal is built on trust, quality and compassion.
-
 We do not warrant that the service will be uninterrupted or error-free.`
               : `Nos services sont fournis "EN L'ÉTAT" et "SELON DISPONIBILITÉ", sans aucune garantie d'aucune sorte, expresse ou implicite. Pour maintenir notre réseau d'abonnés confidentiel et fidèle, 2good2breal est construit sur la confiance, la qualité et la compassion.
-
 Nous ne garantissons pas que le service sera ininterrompu, sécurisé ou exempt d'erreurs.`
             }
           />
