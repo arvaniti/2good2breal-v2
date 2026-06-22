@@ -60,13 +60,13 @@ export function TermsPage() {
             title={isEnglish ? "2. Description of Services" : "2. Description des Services"}
             content={isEnglish 
               ? `Our services include:
-• Professional verification and vetting of dating profiles from any platform for online or offline dating
-• A.I. powered analysis and authenticity assessment
-• Detailed dossier reports with trust score
-• Red flag detection, scamming identification and description.
+• Professional profile verification and vetting of dating profiles from any platform, for both online and offline dating
+• A.I.‑powered analysis and authenticity assessment
+• Detailed dossier reports with an assigned trust score
+• Red‑flag detection, scam identification, and descriptive findings
 • Customized verification filters based on your preferences
 
-All verification results delivered to you within 48 hours of your requested profile submission. Our team utilizes advanced technology, including comprehensive A.I. systems and social platform researches to provide you an accurate and precise profile assessment.`
+All verification results are delivered within 48 hours of your profile submission. Our team uses advanced technology — including comprehensive A.I. systems and in‑depth manual social‑platform research — to provide you with an accurate and precise profile assessment.`
               : `Nos services comprennent :
 • Vérification professionnelle des profils de rencontres de toute plateforme
 • Analyse alimentée par l'IA et évaluation de l'authenticité
