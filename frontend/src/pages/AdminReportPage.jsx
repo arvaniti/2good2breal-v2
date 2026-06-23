@@ -113,8 +113,9 @@ export function AdminReportPage() {
     const token = localStorage.getItem('admin_token');
     if (!token) return;
     
-    // Create download link
     const downloadUrl = API + '/admin/analyses/' + analysisId + '/download-docx';
+    
+    toast.info('Downloading DOCX...');
     
     fetch(downloadUrl, {
       method: 'GET',
@@ -125,18 +126,22 @@ export function AdminReportPage() {
       return response.blob();
     })
     .then(function(blob) {
-      const url = window.URL.createObjectURL(blob);
+      const docxBlob = new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const url = window.URL.createObjectURL(docxBlob);
       const a = document.createElement('a');
+      a.style.display = 'none';
       a.href = url;
-      a.download = 'Report_' + (formData.profile_name || 'profile') + '_' + new Date().toISOString().split('T')[0] + '.docx';
+      a.download = 'Report_' + (formData.profile_name || 'profile').replace(/[^a-zA-Z0-9]/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.docx';
       document.body.appendChild(a);
       a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-      toast.success('DOCX downloaded');
+      // Delay cleanup to ensure download starts
+      setTimeout(function() {
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }, 3000);
+      toast.success('DOCX downloaded - check your Downloads folder');
     })
     .catch(function(err) {
-      console.error(err);
       toast.error('Failed to download DOCX');
     });
   }
