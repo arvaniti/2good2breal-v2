@@ -576,6 +576,25 @@ export const LandingPage = () => {
               </div>
             </div>
 
+            {/* Testimonial 7 - Julie Full Width */}
+            <div className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-teal-950/30 to-zinc-900/50 border border-teal-800/30 rounded-2xl p-6 hover:border-teal-700/50 transition-colors">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={`julie-${i}`} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                ))}
+              </div>
+              <p className="text-zinc-300 mb-6 italic leading-relaxed">"{t('landing.testimonials.review7')}"</p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center text-white font-semibold">
+                  J
+                </div>
+                <div>
+                  <p className="text-white font-medium">Julie</p>
+                  <p className="text-zinc-500 text-sm">Romance Scam Advocate</p>
+                </div>
+              </div>
+            </div>
+
             {/* Testimonial 8 - Natalia Full Width */}
             <div className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-purple-950/30 to-zinc-900/50 border border-purple-800/30 rounded-2xl p-6 hover:border-purple-700/50 transition-colors">
               <div className="flex items-center gap-1 mb-4">
