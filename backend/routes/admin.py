@@ -27,41 +27,38 @@ router = APIRouter()
 
 @router.post("/admin/login", response_model=AdminTokenResponse)
 async def admin_login(credentials: AdminLogin):
-    # Always sync admin credentials with env vars (critical for serverless cold starts)
-    try:
-        await seed_admin_user()
-    except Exception as e:
-        logger.error(f"Auto-seed admin failed: {e}")
-
-    admin = await db.admin_users.find_one({"username": credentials.username})
-    if not admin:
-        default_username = os.environ.get('ADMIN_USERNAME', 'admin')
-        default_password = os.environ.get('ADMIN_PASSWORD', 'admin2026')
-        if credentials.username == default_username and credentials.password == default_password:
-            hashed = hash_password(credentials.password)
-            await db.admin_users.insert_one({
-                "username": credentials.username,
-                "password_hash": hashed,
-                "created_at": datetime.now(timezone.utc)
-            })
-            token = create_admin_token()
-            return AdminTokenResponse(access_token=token)
-        raise HTTPException(status_code=401, detail="Invalid admin credentials")
-
-    if not verify_password(credentials.password, admin["password_hash"]):
-        # Fallback: if credentials match env vars, force-update the hash (fixes corrupted hashes)
-        default_username = os.environ.get('ADMIN_USERNAME', 'admin')
-        default_password = os.environ.get('ADMIN_PASSWORD', 'admin2026')
-        if credentials.username == default_username and credentials.password == default_password:
+    logger.info(f"Admin login attempt for username: '{credentials.username}'")
+    
+    # Step 1: Check env vars
+    default_username = os.environ.get('ADMIN_USERNAME', 'admin')
+    default_password = os.environ.get('ADMIN_PASSWORD', 'admin2026')
+    
+    # Step 2: Direct env var match - always works regardless of DB state
+    if credentials.username == default_username and credentials.password == default_password:
+        # Ensure admin exists in DB with correct hash
+        try:
             new_hash = hash_password(credentials.password)
             await db.admin_users.update_one(
                 {"username": credentials.username},
-                {"$set": {"password_hash": new_hash}}
+                {"$set": {"password_hash": new_hash, "updated_at": datetime.now(timezone.utc)}},
+                upsert=True
             )
-            logger.info(f"Admin password hash force-updated for '{credentials.username}'")
-            token = create_admin_token()
-            return AdminTokenResponse(access_token=token)
-        raise HTTPException(status_code=401, detail="Invalid admin credentials")
+        except Exception as e:
+            logger.error(f"Admin upsert failed: {e}")
+        
+        token = create_admin_token()
+        logger.info(f"Admin login successful for '{credentials.username}' (env match)")
+        return AdminTokenResponse(access_token=token)
+    
+    # Step 3: Check DB hash for non-default credentials
+    admin = await db.admin_users.find_one({"username": credentials.username})
+    if admin and verify_password(credentials.password, admin["password_hash"]):
+        token = create_admin_token()
+        logger.info(f"Admin login successful for '{credentials.username}' (hash match)")
+        return AdminTokenResponse(access_token=token)
+    
+    logger.warning(f"Admin login failed for '{credentials.username}'")
+    raise HTTPException(status_code=401, detail="Invalid admin credentials")
 
     token = create_admin_token()
     return AdminTokenResponse(access_token=token)
