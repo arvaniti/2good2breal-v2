@@ -112,38 +112,8 @@ export function AdminReportPage() {
   function handleDownloadDocx() {
     const token = localStorage.getItem('admin_token');
     if (!token) return;
-    
-    const downloadUrl = API + '/admin/analyses/' + analysisId + '/download-docx';
-    
-    toast.info('Downloading DOCX...');
-    
-    fetch(downloadUrl, {
-      method: 'GET',
-      headers: { 'Authorization': 'Bearer ' + token }
-    })
-    .then(function(response) {
-      if (!response.ok) throw new Error('Download failed');
-      return response.blob();
-    })
-    .then(function(blob) {
-      const docxBlob = new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-      const url = window.URL.createObjectURL(docxBlob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = 'Report_' + (formData.profile_name || 'profile').replace(/[^a-zA-Z0-9]/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.docx';
-      document.body.appendChild(a);
-      a.click();
-      // Delay cleanup to ensure download starts
-      setTimeout(function() {
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-      }, 3000);
-      toast.success('DOCX downloaded - check your Downloads folder');
-    })
-    .catch(function(err) {
-      toast.error('Failed to download DOCX');
-    });
+    const downloadUrl = API + '/admin/analyses/' + analysisId + '/download-docx?token=' + encodeURIComponent(token);
+    window.open(downloadUrl, '_self');
   }
 
   if (loading) return React.createElement('div', {className: 'min-h-screen bg-zinc-950 flex items-center justify-center'}, React.createElement('div', {className: 'text-purple-400'}, 'Loading...'));

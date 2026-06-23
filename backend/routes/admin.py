@@ -5,8 +5,9 @@ import base64
 import asyncio
 from io import BytesIO
 from datetime import datetime, timezone
-from fastapi import APIRouter, HTTPException, Depends, Response
+from fastapi import APIRouter, HTTPException, Depends, Response, Query
 from fastapi.responses import StreamingResponse
+import jwt
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -23,6 +24,38 @@ import resend
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
+
+
+async def verify_admin_token_param(token: str):
+    """Verify admin from query parameter token (for direct browser downloads)."""
+    from config import JWT_SECRET, JWT_ALGORITHM
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        if not payload.get("is_admin"):
+            raise HTTPException(status_code=403, detail="Admin access required")
+        return {"is_admin": True}
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+
+async def get_admin_flexible(token: str = Query(None), credentials: str = None):
+    """Accept admin auth from either Authorization header or query param token."""
+    from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+    from config import JWT_SECRET, JWT_ALGORITHM
+    
+    # Try query param first
+    if token:
+        try:
+            payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+            if payload.get("is_admin"):
+                return {"is_admin": True}
+        except:
+            pass
+    
+    # Fall through to raise 403
+    raise HTTPException(status_code=403, detail="Admin access required")
 
 
 @router.post("/admin/login", response_model=AdminTokenResponse)
@@ -236,7 +269,12 @@ async def admin_delete_analysis(analysis_id: str, admin: dict = Depends(get_admi
 
 
 @router.get("/admin/analyses/{analysis_id}/submission-pdf")
-async def download_submission_pdf(analysis_id: str, admin: dict = Depends(get_admin_user)):
+async def download_submission_pdf(analysis_id: str, token: str = Query(None)):
+    if token:
+        await verify_admin_token_param(token)
+    else:
+        from fastapi.security import HTTPBearer
+        raise HTTPException(status_code=401, detail="Token required")
     from reportlab.platypus import Image as RLImage
     from reportlab.lib.units import inch
 
@@ -376,7 +414,11 @@ async def download_submission_pdf(analysis_id: str, admin: dict = Depends(get_ad
 
 
 @router.get("/admin/analyses/{analysis_id}/submission-docx")
-async def download_submission_docx(analysis_id: str, admin: dict = Depends(get_admin_user)):
+async def download_submission_docx(analysis_id: str, token: str = Query(None)):
+    if token:
+        await verify_admin_token_param(token)
+    else:
+        raise HTTPException(status_code=401, detail="Token required")
     analysis = await db.verification_results.find_one({"id": analysis_id}, {"_id": 0})
     if not analysis:
         raise HTTPException(status_code=404, detail="Analysis not found")
@@ -732,7 +774,11 @@ async def send_report_to_client(analysis_id: str, data: SendReportData, admin: d
 
 
 @router.get("/admin/analyses/{analysis_id}/download-docx")
-async def download_report_docx(analysis_id: str, admin: dict = Depends(get_admin_user)):
+async def download_report_docx(analysis_id: str, token: str = Query(None)):
+    if token:
+        await verify_admin_token_param(token)
+    else:
+        raise HTTPException(status_code=401, detail="Token required")
     analysis = await db.verification_results.find_one({"id": analysis_id}, {"_id": 0})
     if not analysis:
         raise HTTPException(status_code=404, detail="Analysis not found")

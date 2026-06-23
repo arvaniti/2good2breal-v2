@@ -325,29 +325,8 @@ function AnalysisRow(props) {
   async function handleDownloadDOCX(e) {
     e.stopPropagation();
     const token = localStorage.getItem('admin_token');
-    try {
-      toast.info('Downloading DOCX...');
-      const response = await axios.get(`${API}/admin/analyses/${analysis.id}/submission-docx`, {
-        headers: { Authorization: 'Bearer ' + token },
-        responseType: 'blob'
-      });
-      
-      const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.style.display = 'none';
-      link.href = url;
-      link.download = `submission_${analysis.profile_name?.replace(/[^a-zA-Z0-9]/g, '_') || 'profile'}_${analysis.id.substring(0, 8)}.docx`;
-      document.body.appendChild(link);
-      link.click();
-      setTimeout(() => {
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(link);
-      }, 3000);
-      toast.success('DOCX downloaded - check your Downloads folder');
-    } catch (err) {
-      toast.error('Failed to download DOCX');
-    }
+    const downloadUrl = `${API}/admin/analyses/${analysis.id}/submission-docx?token=${encodeURIComponent(token)}`;
+    window.open(downloadUrl, '_self');
   }
   
   function handlePrint(e) {
