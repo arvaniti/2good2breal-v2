@@ -584,6 +584,19 @@ function AnalysisRow(props) {
           <div class="field-value textarea-value">${formData.observations_concerns || '-'}</div>
         </div>
         
+        <!-- RISK-ASSESSMENT CHECKLIST -->
+        <div class="section" style="margin-top: 20px;">
+          <div class="section-title" style="color: #dc2626; border-bottom-color: #dc2626;">RISK-ASSESSMENT CHECKLIST</div>
+          <p style="font-style: italic; color: #555; margin-bottom: 12px;">Please respond Yes or No to the following questions:</p>
+          <ol style="margin: 0; padding-left: 20px; line-height: 2.2; color: #333;">
+            <li>Has the profile done a normal, clear video call?</li>
+            <li>Has the profile sent a timestamped photo on request?</li>
+            <li>Do the profile's details seem consistent over time?</li>
+            <li>Does the profile avoid answering direct questions?</li>
+            <li>Does the profile seem to push for rapid emotional intimacy?</li>
+          </ol>
+        </div>
+        
         ${analysis.ai_analysis ? `
         <!-- AI ANALYSIS SECTION -->
         <div class="ai-section" style="background: ${(analysis.ai_analysis.overall_score || 0) >= 70 ? '#f0fdf4' : (analysis.ai_analysis.overall_score || 0) >= 40 ? '#fefce8' : '#fef2f2'}; border: 2px solid ${(analysis.ai_analysis.overall_score || 0) >= 70 ? '#22c55e' : (analysis.ai_analysis.overall_score || 0) >= 40 ? '#eab308' : '#dc2626'}; border-radius: 8px; padding: 20px; margin-top: 30px; page-break-inside: avoid;">
