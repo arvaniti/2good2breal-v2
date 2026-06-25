@@ -326,7 +326,32 @@ function AnalysisRow(props) {
     e.stopPropagation();
     const token = localStorage.getItem('admin_token');
     const downloadUrl = `${API}/admin/analyses/${analysis.id}/submission-docx?token=${encodeURIComponent(token)}`;
-    window.location.assign(downloadUrl);
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', downloadUrl, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        var blob = xhr.response;
+        var filename = `submission_${(analysis.profile_name || 'profile').replace(/[^a-zA-Z0-9]/g, '_')}.docx`;
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function() {
+            URL.revokeObjectURL(url);
+            a.remove();
+          }, 10000);
+        }
+      }
+    };
+    xhr.send();
   }
   
   function handlePrint(e) {

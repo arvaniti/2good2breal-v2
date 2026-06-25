@@ -113,7 +113,32 @@ export function AdminReportPage() {
     const token = localStorage.getItem('admin_token');
     if (!token) return;
     const downloadUrl = API + '/admin/analyses/' + analysisId + '/download-docx?token=' + encodeURIComponent(token);
-    window.location.assign(downloadUrl);
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', downloadUrl, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        var blob = xhr.response;
+        var filename = 'Report_' + (formData.profile_name || 'profile').replace(/[^a-zA-Z0-9]/g, '_') + '.docx';
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function() {
+            URL.revokeObjectURL(url);
+            a.remove();
+          }, 10000);
+        }
+      }
+    };
+    xhr.send();
   }
 
   if (loading) return React.createElement('div', {className: 'min-h-screen bg-zinc-950 flex items-center justify-center'}, React.createElement('div', {className: 'text-purple-400'}, 'Loading...'));
