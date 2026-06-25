@@ -109,36 +109,16 @@ export function AdminReportPage() {
       .catch(function() { toast.error('Failed to send'); setSaving(false); });
   }
 
-  function handleDownloadDocx() {
+  function getDocxUrl() {
     const token = localStorage.getItem('admin_token');
-    if (!token) return;
-    const downloadUrl = API + '/admin/analyses/' + analysisId + '/download-docx?token=' + encodeURIComponent(token);
-    
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', downloadUrl, true);
-    xhr.responseType = 'blob';
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        var blob = xhr.response;
-        var filename = 'Report_' + (formData.profile_name || 'profile').replace(/[^a-zA-Z0-9]/g, '_') + '.docx';
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(blob, filename);
-        } else {
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = filename;
-          a.style.display = 'none';
-          document.body.appendChild(a);
-          a.click();
-          setTimeout(function() {
-            URL.revokeObjectURL(url);
-            a.remove();
-          }, 10000);
-        }
-      }
-    };
-    xhr.send();
+    if (!token) return '#';
+    return API + '/admin/analyses/' + analysisId + '/download-docx?token=' + encodeURIComponent(token);
+  }
+
+  function getSubmissionDocxUrl() {
+    const token = localStorage.getItem('admin_token');
+    if (!token) return '#';
+    return API + '/admin/analyses/' + analysisId + '/submission-docx?token=' + encodeURIComponent(token);
   }
 
   if (loading) return React.createElement('div', {className: 'min-h-screen bg-zinc-950 flex items-center justify-center'}, React.createElement('div', {className: 'text-purple-400'}, 'Loading...'));
@@ -204,9 +184,9 @@ export function AdminReportPage() {
             <span className="text-white font-medium">Aperçu DOCX - Format Final</span>
           </div>
           <div className="flex items-center gap-2">
-            <Button size="sm" onClick={handleDownloadDocx} className="bg-blue-600 hover:bg-blue-500">
+            <a href={getDocxUrl()} download className="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md bg-blue-600 hover:bg-blue-500 text-white">
               <Download className="w-4 h-4 mr-2" /> Télécharger DOCX
-            </Button>
+            </a>
           </div>
         </div>
 
@@ -725,9 +705,9 @@ export function AdminReportPage() {
             <Button variant="outline" size="sm" onClick={function() { setShowDocxPreview(true); }} className="border-green-700 text-green-400 hover:bg-green-900/30">
               <Eye className="w-4 h-4 mr-2" /> Aperçu DOCX
             </Button>
-            <Button variant="outline" size="sm" onClick={handleDownloadDocx} className="border-blue-700 text-blue-400 hover:bg-blue-900/30">
+            <a href={getDocxUrl()} download className="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md border border-blue-700 text-blue-400 hover:bg-blue-900/30">
               <Download className="w-4 h-4 mr-2" /> DOCX
-            </Button>
+            </a>
             <Button variant="outline" size="sm" onClick={function() { setShowPreview(true); }} className="border-purple-700 text-purple-400 hover:bg-purple-900/30">
               <Eye className="w-4 h-4 mr-2" /> Preview & Print PDF
             </Button>

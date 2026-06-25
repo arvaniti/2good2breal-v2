@@ -321,37 +321,9 @@ function AnalysisRow(props) {
     }
   }
   
-  // Download DOCX with authentication
-  async function handleDownloadDOCX(e) {
-    e.stopPropagation();
+  function getDocxDownloadUrl() {
     const token = localStorage.getItem('admin_token');
-    const downloadUrl = `${API}/admin/analyses/${analysis.id}/submission-docx?token=${encodeURIComponent(token)}`;
-    
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', downloadUrl, true);
-    xhr.responseType = 'blob';
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        var blob = xhr.response;
-        var filename = `submission_${(analysis.profile_name || 'profile').replace(/[^a-zA-Z0-9]/g, '_')}.docx`;
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(blob, filename);
-        } else {
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = filename;
-          a.style.display = 'none';
-          document.body.appendChild(a);
-          a.click();
-          setTimeout(function() {
-            URL.revokeObjectURL(url);
-            a.remove();
-          }, 10000);
-        }
-      }
-    };
-    xhr.send();
+    return `${API}/admin/analyses/${analysis.id}/submission-docx?token=${encodeURIComponent(token)}`;
   }
   
   function handlePrint(e) {
@@ -835,13 +807,14 @@ function AnalysisRow(props) {
               >
                 <Download className="w-4 h-4 mr-2" /> PDF
               </Button>
-              <Button 
-                onClick={handleDownloadDOCX} 
-                variant="outline" 
-                className="border-green-600 text-green-400 hover:bg-green-950/50"
+              <a 
+                href={getDocxDownloadUrl()} 
+                download
+                onClick={function(e) { e.stopPropagation(); }}
+                className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md border border-green-600 text-green-400 hover:bg-green-950/50"
               >
                 <FileDown className="w-4 h-4 mr-2" /> DOCX
-              </Button>
+              </a>
               <Button onClick={handleCreateReport} className="bg-purple-600 hover:bg-purple-500">
                 <Send className="w-4 h-4 mr-2" /> Create Report
               </Button>
