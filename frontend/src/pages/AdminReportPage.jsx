@@ -484,6 +484,21 @@ export function AdminReportPage() {
                 <div className="pr-box" style={{background: '#fffbeb', border: '1px solid #fcd34d', minHeight: '80px', maxHeight: '300px', overflowY: 'auto', whiteSpace: 'pre-wrap', wordBreak: 'break-word'}}>{formData.observations_concerns}</div>
               </div>
             ) : null}
+
+            {/* Risk-Assessment Checklist */}
+            <div style={{marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #eee'}}>
+              <p style={{fontWeight: 'bold', color: '#dc2626', marginBottom: '8px', fontSize: '16px'}}>Risk-Assessment Checklist</p>
+              <p style={{color: '#555', marginBottom: '12px', fontStyle: 'italic'}}>Please respond Yes or No to the following questions:</p>
+              <div style={{background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: '8px', padding: '15px'}}>
+                <ol style={{margin: 0, paddingLeft: '20px', color: '#333', lineHeight: '2'}}>
+                  <li>Has the profile done a normal, clear video call?</li>
+                  <li>Has the profile sent a timestamped photo on request?</li>
+                  <li>Do the profile's details seem consistent over time?</li>
+                  <li>Does the profile avoid answering direct questions?</li>
+                  <li>Does the profile seem to push for rapid emotional intimacy?</li>
+                </ol>
+              </div>
+            </div>
             {formData.message_substance ? (
               <div style={{marginTop: '15px'}}>
                 <p style={{fontWeight: 'bold', color: '#6366f1', marginBottom: '8px'}}>Message Substance:</p>

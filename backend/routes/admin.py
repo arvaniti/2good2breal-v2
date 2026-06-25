@@ -381,6 +381,21 @@ async def download_submission_pdf(analysis_id: str, token: str = Query(None)):
 
     elements.append(Paragraph("OBSERVATIONS & CONCERNS", section_style))
     elements.append(Paragraph(form_data.get("observations_concerns", "-"), value_style))
+    elements.append(Spacer(1, 15))
+
+    # Risk-Assessment Checklist
+    elements.append(Paragraph("RISK-ASSESSMENT CHECKLIST", section_style))
+    elements.append(Paragraph("Please respond Yes or No to the following questions:", ParagraphStyle('ChecklistIntro', parent=value_style, fontName='Helvetica-Oblique', textColor=colors.HexColor('#555555'))))
+    elements.append(Spacer(1, 8))
+    checklist_items = [
+        "1.  Has the profile done a normal, clear video call?",
+        "2.  Has the profile sent a timestamped photo on request?",
+        "3.  Do the profile's details seem consistent over time?",
+        "4.  Does the profile avoid answering direct questions?",
+        "5.  Does the profile seem to push for rapid emotional intimacy?"
+    ]
+    for item in checklist_items:
+        elements.append(Paragraph(item, ParagraphStyle('ChecklistItem', parent=value_style, spaceBefore=4, spaceAfter=4)))
     elements.append(Spacer(1, 20))
 
     if ai_analysis:
@@ -570,6 +585,25 @@ async def download_submission_docx(analysis_id: str, token: str = Query(None)):
     doc.add_paragraph()
     doc.add_heading('OBSERVATIONS & CONCERNS', level=1)
     doc.add_paragraph(form_data.get("observations_concerns", "-") or "-")
+    doc.add_paragraph()
+
+    # Risk-Assessment Checklist
+    checklist_heading = doc.add_heading('Risk-Assessment Checklist', level=1)
+    for run in checklist_heading.runs:
+        run.font.color.rgb = RGBColor(220, 38, 38)
+    intro = doc.add_paragraph()
+    intro_run = intro.add_run("Please respond Yes or No to the following questions:")
+    intro_run.font.italic = True
+    doc.add_paragraph()
+    checklist_items = [
+        "Has the profile done a normal, clear video call?",
+        "Has the profile sent a timestamped photo on request?",
+        "Do the profile's details seem consistent over time?",
+        "Does the profile avoid answering direct questions?",
+        "Does the profile seem to push for rapid emotional intimacy?"
+    ]
+    for i, item in enumerate(checklist_items, 1):
+        doc.add_paragraph(f"{i}.  {item}")
 
     # PAGE 5: AI ANALYSIS
     if ai_analysis:
