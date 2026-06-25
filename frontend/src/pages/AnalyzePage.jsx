@@ -616,6 +616,19 @@ export const AnalyzePage = () => {
           <div class="field-value textarea-value">${formData.observations_concerns || '-'}</div>
         </div>
         
+        <!-- RISK-ASSESSMENT CHECKLIST -->
+        <div class="section" style="margin-top: 20px;">
+          <div class="section-title" style="color: #dc2626; border-bottom-color: #dc2626;">${isFr ? 'LISTE DE CONTRÔLE D\'ÉVALUATION DES RISQUES' : 'RISK-ASSESSMENT CHECKLIST'}</div>
+          <p style="font-style: italic; color: #555; margin-bottom: 12px;">${isFr ? 'Veuillez répondre Oui ou Non aux questions suivantes :' : 'Please respond Yes or No to the following questions:'}</p>
+          <ol style="margin: 0; padding-left: 20px; line-height: 2.2; color: #333;">
+            <li>${isFr ? 'Le profil a-t-il fait un appel vidéo normal et clair ?' : 'Has the profile done a normal, clear video call?'}</li>
+            <li>${isFr ? 'Le profil a-t-il envoyé une photo horodatée sur demande ?' : 'Has the profile sent a timestamped photo on request?'}</li>
+            <li>${isFr ? 'Les détails du profil semblent-ils cohérents dans le temps ?' : 'Do the profile\'s details seem consistent over time?'}</li>
+            <li>${isFr ? 'Le profil évite-t-il de répondre aux questions directes ?' : 'Does the profile avoid answering direct questions?'}</li>
+            <li>${isFr ? 'Le profil semble-t-il pousser vers une intimité émotionnelle rapide ?' : 'Does the profile seem to push for rapid emotional intimacy?'}</li>
+          </ol>
+        </div>
+        
         <div class="footer">
           <p><strong style="font-family: Arial, sans-serif;"><span style="font-size: 1.2em;">2</span>good<span style="font-size: 1.2em;">2</span>breal</strong> - Profile Verification Service</p>
           <p>contact@2good2breal.com | +33 (0) 7 67 92 55 45 | www.2good2breal.com</p>
