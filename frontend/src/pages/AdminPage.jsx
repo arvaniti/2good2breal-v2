@@ -326,14 +326,7 @@ function AnalysisRow(props) {
     e.stopPropagation();
     const token = localStorage.getItem('admin_token');
     const downloadUrl = `${API}/admin/analyses/${analysis.id}/submission-docx?token=${encodeURIComponent(token)}`;
-    var iframe = document.getElementById('docx-download-frame');
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.id = 'docx-download-frame';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-    }
-    iframe.src = downloadUrl;
+    window.location.assign(downloadUrl);
   }
   
   function handlePrint(e) {
