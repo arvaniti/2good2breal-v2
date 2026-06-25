@@ -113,7 +113,12 @@ export function AdminReportPage() {
     const token = localStorage.getItem('admin_token');
     if (!token) return;
     const downloadUrl = API + '/admin/analyses/' + analysisId + '/download-docx?token=' + encodeURIComponent(token);
-    window.open(downloadUrl, '_self');
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = '';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
   if (loading) return React.createElement('div', {className: 'min-h-screen bg-zinc-950 flex items-center justify-center'}, React.createElement('div', {className: 'text-purple-400'}, 'Loading...'));

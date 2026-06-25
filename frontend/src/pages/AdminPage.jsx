@@ -326,7 +326,12 @@ function AnalysisRow(props) {
     e.stopPropagation();
     const token = localStorage.getItem('admin_token');
     const downloadUrl = `${API}/admin/analyses/${analysis.id}/submission-docx?token=${encodeURIComponent(token)}`;
-    window.open(downloadUrl, '_self');
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = '';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
   
   function handlePrint(e) {
