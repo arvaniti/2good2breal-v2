@@ -326,12 +326,14 @@ function AnalysisRow(props) {
     e.stopPropagation();
     const token = localStorage.getItem('admin_token');
     const downloadUrl = `${API}/admin/analyses/${analysis.id}/submission-docx?token=${encodeURIComponent(token)}`;
-    const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = '';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    var iframe = document.getElementById('docx-download-frame');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = 'docx-download-frame';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    iframe.src = downloadUrl;
   }
   
   function handlePrint(e) {
