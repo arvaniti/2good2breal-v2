@@ -36,10 +36,8 @@ async def register(user_data: UserRegister):
     await db.users.insert_one(user)
     token = create_token(user_id)
 
-    try:
-        await send_registration_notification(user_data.name, user_data.email, user_data.password)
-    except Exception as e:
-        logger.error(f"Non-blocking: Registration email failed: {e}")
+    # Fire-and-forget email notification (truly non-blocking)
+    asyncio.create_task(send_registration_notification(user_data.name, user_data.email, user_data.password))
 
     return TokenResponse(
         access_token=token,
