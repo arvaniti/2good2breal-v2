@@ -98,7 +98,10 @@ export const AnalyzePage = () => {
     last_communication_timeframe: '',
     first_meet_date: '',
     first_engagement_timeframe: '',
-    observations_concerns: ''
+    observations_concerns: '',
+    risk_q1: '', risk_q2: '', risk_q3: '', risk_q4: '', risk_q5: '',
+    risk_q6: '', risk_q7: '', risk_q8: '', risk_q9: '', risk_q10: '',
+    risk_q11: '', risk_q12: '', risk_q13: '', risk_q14: '', risk_q15: ''
   });
 
   // Extract first name from full name or email
@@ -273,6 +276,23 @@ export const AnalyzePage = () => {
         first_meet_date: formData.first_meet_date,
         first_engagement_timeframe: formData.first_engagement_timeframe,
         observations_concerns: formData.observations_concerns,
+        risk_assessment: {
+          q1_video_call: formData.risk_q1,
+          q2_timestamped_photo: formData.risk_q2,
+          q3_details_consistent: formData.risk_q3,
+          q4_avoids_questions: formData.risk_q4,
+          q5_fast_intimacy: formData.risk_q5,
+          q6_excessive_messaging: formData.risk_q6,
+          q7_hides_environment: formData.risk_q7,
+          q8_pressures_secrecy: formData.risk_q8,
+          q9_guilt_trips: formData.risk_q9,
+          q10_emotional_dependency: formData.risk_q10,
+          q11_isolates_you: formData.risk_q11,
+          q12_dramatic_stories: formData.risk_q12,
+          q13_blocked_accounts: formData.risk_q13,
+          q14_needs_help: formData.risk_q14,
+          q15_pay_travel: formData.risk_q15
+        },
         photos: photos.map(p => ({
           name: p.name,
           base64: p.base64
@@ -1850,6 +1870,70 @@ export const AnalyzePage = () => {
                       : "e.g., Vague about occupation, Avoids video calls, Money requests..."}
                     data-testid="input-observations"
                   />
+                </CardContent>
+              </Card>
+
+              {/* Risk-Assessment Checklist */}
+              <Card className="bg-zinc-900/50 border-red-800/30">
+                <CardHeader>
+                  <CardTitle className="text-lg text-red-400">
+                    {isFr ? "Évaluation des Risques" : "Risk-Assessment"}
+                  </CardTitle>
+                  <CardDescription className="text-zinc-400">
+                    {isFr ? "Cochez Oui ou Non pour chaque question" : "Tick Yes or No for each question"}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {[
+                    { key: 'risk_q1', en: "Has the profile made a normal, clear video call?", fr: "Le profil a-t-il fait un appel vidéo normal et clair ?" },
+                    { key: 'risk_q2', en: "Has the profile sent a timestamped photo on request?", fr: "Le profil a-t-il envoyé une photo horodatée sur demande ?" },
+                    { key: 'risk_q3', en: "Are the profile's details consistent?", fr: "Les détails du profil sont-ils cohérents ?" },
+                    { key: 'risk_q4', en: "Does the profile avoid answering direct questions?", fr: "Le profil évite-t-il de répondre aux questions directes ?" },
+                    { key: 'risk_q5', en: "Does the profile push for fast emotional intimacy?", fr: "Le profil pousse-t-il vers une intimité émotionnelle rapide ?" },
+                    { key: 'risk_q6', en: "Does the profile message excessively or at strange hours?", fr: "Le profil envoie-t-il des messages excessivement ou à des heures étranges ?" },
+                    { key: 'risk_q7', en: "Does the profile avoid showing his environment or daily life?", fr: "Le profil évite-t-il de montrer son environnement ou sa vie quotidienne ?" },
+                    { key: 'risk_q8', en: "Does the profile pressure for secrecy?", fr: "Le profil exerce-t-il une pression pour le secret ?" },
+                    { key: 'risk_q9', en: "Do you feel the profile guilt-trips you when questioned?", fr: "Avez-vous l'impression que le profil vous culpabilise quand vous posez des questions ?" },
+                    { key: 'risk_q10', en: "Has or does the profile create emotional dependency?", fr: "Le profil crée-t-il une dépendance émotionnelle ?" },
+                    { key: 'risk_q11', en: "Do you feel the profile isolates you from friends/advisers?", fr: "Avez-vous l'impression que le profil vous isole de vos amis/conseillers ?" },
+                    { key: 'risk_q12', en: "Does the profile use dramatic stories (illness, tragedy, danger)?", fr: "Le profil utilise-t-il des histoires dramatiques (maladie, tragédie, danger) ?" },
+                    { key: 'risk_q13', en: "Has the profile mentioned blocked accounts, frozen funds, or travel issues?", fr: "Le profil a-t-il mentionné des comptes bloqués, des fonds gelés ou des problèmes de voyage ?" },
+                    { key: 'risk_q14', en: "Has the profile hinted needing help or support?", fr: "Le profil a-t-il laissé entendre qu'il avait besoin d'aide ou de soutien ?" },
+                    { key: 'risk_q15', en: "Has the profile asked you to pay for travel, visas, or customs fees?", fr: "Le profil vous a-t-il demandé de payer des frais de voyage, visas ou douane ?" }
+                  ].map((q, idx) => (
+                    <div key={q.key} className="flex items-start gap-3 py-2 border-b border-zinc-800/50 last:border-0">
+                      <span className="text-zinc-400 text-sm font-medium min-w-[28px] pt-0.5">{idx + 1}.</span>
+                      <span className="text-zinc-300 text-sm flex-1 pt-0.5">{isFr ? q.fr : q.en}</span>
+                      <div className="flex items-center gap-3 shrink-0">
+                        <label className="flex items-center gap-1.5 cursor-pointer">
+                          <input
+                            type="radio"
+                            name={q.key}
+                            value="yes"
+                            checked={formData[q.key] === 'yes'}
+                            onChange={() => handleChange(q.key, 'yes')}
+                            className="accent-green-500"
+                          />
+                          <span className={`text-xs font-medium ${formData[q.key] === 'yes' ? 'text-green-400' : 'text-zinc-500'}`}>
+                            {isFr ? 'Oui' : 'Yes'}
+                          </span>
+                        </label>
+                        <label className="flex items-center gap-1.5 cursor-pointer">
+                          <input
+                            type="radio"
+                            name={q.key}
+                            value="no"
+                            checked={formData[q.key] === 'no'}
+                            onChange={() => handleChange(q.key, 'no')}
+                            className="accent-red-500"
+                          />
+                          <span className={`text-xs font-medium ${formData[q.key] === 'no' ? 'text-red-400' : 'text-zinc-500'}`}>
+                            {isFr ? 'Non' : 'No'}
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
 

@@ -96,6 +96,7 @@ async def analyze_profile(profile: ProfileAnalysisRequest, current_user: dict = 
         "first_meet_date": profile.first_meet_date,
         "first_engagement_timeframe": profile.first_engagement_timeframe,
         "observations_concerns": profile.observations_concerns,
+        "risk_assessment": profile.risk_assessment,
         "photos_uploaded": photos_count,
         "photos": [{"name": p.name, "base64": p.base64} for p in profile.photos] if profile.photos else []
     }

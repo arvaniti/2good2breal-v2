@@ -45,6 +45,7 @@ class ProfileAnalysisRequest(BaseModel):
     first_meet_date: Optional[str] = ""
     first_engagement_timeframe: Optional[str] = ""
     observations_concerns: Optional[str] = ""
+    risk_assessment: Optional[Dict[str, Any]] = None
     photos: Optional[List[UploadedPhoto]] = []
 
 
