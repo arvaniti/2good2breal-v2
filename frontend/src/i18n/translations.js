@@ -165,7 +165,7 @@ export const translations = {
     // Dashboard
     dashboard: {
       title: "Dashboard",
-      welcome: "Welcome back",
+      welcome: "Welcome",
       stats: {
         totalAnalyses: "Total Analyses",
         averageScore: "Avg Trust Score",
