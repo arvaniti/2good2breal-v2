@@ -490,17 +490,26 @@ export function AdminReportPage() {
               </div>
             ) : null}
 
-            {/* Risk-Assessment Checklist */}
+            {/* Risk Indicator Checklist */}
             <div style={{marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #eee'}}>
-              <p style={{fontWeight: 'bold', color: '#dc2626', marginBottom: '8px', fontSize: '16px'}}>Risk-Assessment Checklist</p>
-              <p style={{color: '#555', marginBottom: '12px', fontStyle: 'italic'}}>Please respond Yes or No to the following questions:</p>
+              <p style={{fontWeight: 'bold', color: '#dc2626', marginBottom: '8px', fontSize: '16px'}}>Risk Indicator Checklist</p>
               <div style={{background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: '8px', padding: '15px'}}>
                 <ol style={{margin: 0, paddingLeft: '20px', color: '#333', lineHeight: '2'}}>
-                  <li>Has the profile done a normal, clear video call?</li>
-                  <li>Has the profile sent a timestamped photo on request?</li>
-                  <li>Do the profile's details seem consistent over time?</li>
-                  <li>Does the profile avoid answering direct questions?</li>
-                  <li>Does the profile seem to push for rapid emotional intimacy?</li>
+                  <li>Has the profile completed a normal, clear, real‑time video call?</li>
+                  <li>Has the profile sent a timestamped photo when requested?</li>
+                  <li>Are the profile's personal details consistent across conversations?</li>
+                  <li>Does the profile avoid answering direct or simple questions?</li>
+                  <li>Does the profile push for rapid emotional closeness?</li>
+                  <li>Does the profile message excessively or at unusual hours?</li>
+                  <li>Does the profile avoid showing their environment or daily life?</li>
+                  <li>Does the profile pressure you to keep the connection secret?</li>
+                  <li>Do you feel guilt‑tripped when you ask reasonable questions?</li>
+                  <li>Has the profile tried to create emotional dependency?</li>
+                  <li>Do you feel subtly isolated from friends or advisers?</li>
+                  <li>Does the profile use dramatic stories (illness, tragedy, danger)?</li>
+                  <li>Has the profile mentioned blocked accounts, frozen funds, or travel complications?</li>
+                  <li>Has the profile hinted at needing help or emotional/financial support?</li>
+                  <li>Has the profile asked you to pay for travel, visas, customs fees, or similar costs?</li>
                 </ol>
               </div>
             </div>

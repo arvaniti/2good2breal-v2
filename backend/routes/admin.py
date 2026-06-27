@@ -388,11 +388,21 @@ async def download_submission_pdf(analysis_id: str, token: str = Query(None)):
     elements.append(Paragraph("Please respond Yes or No to the following questions:", ParagraphStyle('ChecklistIntro', parent=value_style, fontName='Helvetica-Oblique', textColor=colors.HexColor('#555555'))))
     elements.append(Spacer(1, 8))
     checklist_items = [
-        "1.  Has the profile done a normal, clear video call?",
-        "2.  Has the profile sent a timestamped photo on request?",
-        "3.  Do the profile's details seem consistent over time?",
-        "4.  Does the profile avoid answering direct questions?",
-        "5.  Does the profile seem to push for rapid emotional intimacy?"
+        "1.  Has the profile completed a normal, clear, real‑time video call?",
+        "2.  Has the profile sent a timestamped photo when requested?",
+        "3.  Are the profile's personal details consistent across conversations?",
+        "4.  Does the profile avoid answering direct or simple questions?",
+        "5.  Does the profile push for rapid emotional closeness?",
+        "6.  Does the profile message excessively or at unusual hours?",
+        "7.  Does the profile avoid showing their environment or daily life?",
+        "8.  Does the profile pressure you to keep the connection secret?",
+        "9.  Do you feel guilt‑tripped when you ask reasonable questions?",
+        "10. Has the profile tried to create emotional dependency?",
+        "11. Do you feel subtly isolated from friends or advisers?",
+        "12. Does the profile use dramatic stories (illness, tragedy, danger)?",
+        "13. Has the profile mentioned blocked accounts, frozen funds, or travel complications?",
+        "14. Has the profile hinted at needing help or emotional/financial support?",
+        "15. Has the profile asked you to pay for travel, visas, customs fees, or similar costs?"
     ]
     for item in checklist_items:
         elements.append(Paragraph(item, ParagraphStyle('ChecklistItem', parent=value_style, spaceBefore=4, spaceAfter=4)))
@@ -588,7 +598,7 @@ async def download_submission_docx(analysis_id: str, token: str = Query(None)):
     doc.add_paragraph()
 
     # Risk-Assessment Checklist
-    checklist_heading = doc.add_heading('Risk-Assessment Checklist', level=1)
+    checklist_heading = doc.add_heading('Risk Indicator Checklist', level=1)
     for run in checklist_heading.runs:
         run.font.color.rgb = RGBColor(220, 38, 38)
     intro = doc.add_paragraph()
@@ -596,11 +606,21 @@ async def download_submission_docx(analysis_id: str, token: str = Query(None)):
     intro_run.font.italic = True
     doc.add_paragraph()
     checklist_items = [
-        "Has the profile done a normal, clear video call?",
-        "Has the profile sent a timestamped photo on request?",
-        "Do the profile's details seem consistent over time?",
-        "Does the profile avoid answering direct questions?",
-        "Does the profile seem to push for rapid emotional intimacy?"
+        "Has the profile completed a normal, clear, real‑time video call?",
+        "Has the profile sent a timestamped photo when requested?",
+        "Are the profile's personal details consistent across conversations?",
+        "Does the profile avoid answering direct or simple questions?",
+        "Does the profile push for rapid emotional closeness?",
+        "Does the profile message excessively or at unusual hours?",
+        "Does the profile avoid showing their environment or daily life?",
+        "Does the profile pressure you to keep the connection secret?",
+        "Do you feel guilt‑tripped when you ask reasonable questions?",
+        "Has the profile tried to create emotional dependency?",
+        "Do you feel subtly isolated from friends or advisers?",
+        "Does the profile use dramatic stories (illness, tragedy, danger)?",
+        "Has the profile mentioned blocked accounts, frozen funds, or travel complications?",
+        "Has the profile hinted at needing help or emotional/financial support?",
+        "Has the profile asked you to pay for travel, visas, customs fees, or similar costs?"
     ]
     for i, item in enumerate(checklist_items, 1):
         doc.add_paragraph(f"{i}.  {item}")

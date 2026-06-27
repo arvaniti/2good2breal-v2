@@ -581,16 +581,25 @@ function AnalysisRow(props) {
           <div class="field-value textarea-value">${formData.observations_concerns || '-'}</div>
         </div>
         
-        <!-- RISK-ASSESSMENT CHECKLIST -->
+        <!-- RISK INDICATOR CHECKLIST -->
         <div class="section" style="margin-top: 20px;">
-          <div class="section-title" style="color: #dc2626; border-bottom-color: #dc2626;">RISK-ASSESSMENT CHECKLIST</div>
-          <p style="font-style: italic; color: #555; margin-bottom: 12px;">Please respond Yes or No to the following questions:</p>
+          <div class="section-title" style="color: #dc2626; border-bottom-color: #dc2626;">RISK INDICATOR CHECKLIST</div>
           <ol style="margin: 0; padding-left: 20px; line-height: 2.2; color: #333;">
-            <li>Has the profile done a normal, clear video call?</li>
-            <li>Has the profile sent a timestamped photo on request?</li>
-            <li>Do the profile's details seem consistent over time?</li>
-            <li>Does the profile avoid answering direct questions?</li>
-            <li>Does the profile seem to push for rapid emotional intimacy?</li>
+            <li>Has the profile completed a normal, clear, real‑time video call?</li>
+            <li>Has the profile sent a timestamped photo when requested?</li>
+            <li>Are the profile's personal details consistent across conversations?</li>
+            <li>Does the profile avoid answering direct or simple questions?</li>
+            <li>Does the profile push for rapid emotional closeness?</li>
+            <li>Does the profile message excessively or at unusual hours?</li>
+            <li>Does the profile avoid showing their environment or daily life?</li>
+            <li>Does the profile pressure you to keep the connection secret?</li>
+            <li>Do you feel guilt‑tripped when you ask reasonable questions?</li>
+            <li>Has the profile tried to create emotional dependency?</li>
+            <li>Do you feel subtly isolated from friends or advisers?</li>
+            <li>Does the profile use dramatic stories (illness, tragedy, danger)?</li>
+            <li>Has the profile mentioned blocked accounts, frozen funds, or travel complications?</li>
+            <li>Has the profile hinted at needing help or emotional/financial support?</li>
+            <li>Has the profile asked you to pay for travel, visas, customs fees, or similar costs?</li>
           </ol>
         </div>
         

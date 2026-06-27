@@ -636,16 +636,25 @@ export const AnalyzePage = () => {
           <div class="field-value textarea-value">${formData.observations_concerns || '-'}</div>
         </div>
         
-        <!-- RISK-ASSESSMENT CHECKLIST -->
+        <!-- RISK INDICATOR CHECKLIST -->
         <div class="section" style="margin-top: 20px;">
-          <div class="section-title" style="color: #dc2626; border-bottom-color: #dc2626;">${isFr ? 'LISTE DE CONTRÔLE D\'ÉVALUATION DES RISQUES' : 'RISK-ASSESSMENT CHECKLIST'}</div>
-          <p style="font-style: italic; color: #555; margin-bottom: 12px;">${isFr ? 'Veuillez répondre Oui ou Non aux questions suivantes :' : 'Please respond Yes or No to the following questions:'}</p>
+          <div class="section-title" style="color: #dc2626; border-bottom-color: #dc2626;">${isFr ? 'LISTE DE CONTRÔLE DES INDICATEURS DE RISQUE' : 'RISK INDICATOR CHECKLIST'}</div>
           <ol style="margin: 0; padding-left: 20px; line-height: 2.2; color: #333;">
-            <li>${isFr ? 'Le profil a-t-il fait un appel vidéo normal et clair ?' : 'Has the profile done a normal, clear video call?'}</li>
-            <li>${isFr ? 'Le profil a-t-il envoyé une photo horodatée sur demande ?' : 'Has the profile sent a timestamped photo on request?'}</li>
-            <li>${isFr ? 'Les détails du profil semblent-ils cohérents dans le temps ?' : 'Do the profile\'s details seem consistent over time?'}</li>
-            <li>${isFr ? 'Le profil évite-t-il de répondre aux questions directes ?' : 'Does the profile avoid answering direct questions?'}</li>
-            <li>${isFr ? 'Le profil semble-t-il pousser vers une intimité émotionnelle rapide ?' : 'Does the profile seem to push for rapid emotional intimacy?'}</li>
+            <li>${isFr ? 'Le profil a-t-il effectué un appel vidéo normal, clair et en temps réel ?' : 'Has the profile completed a normal, clear, real‑time video call?'}</li>
+            <li>${isFr ? 'Le profil a-t-il envoyé une photo horodatée sur demande ?' : 'Has the profile sent a timestamped photo when requested?'}</li>
+            <li>${isFr ? 'Les détails personnels du profil sont-ils cohérents d\'une conversation à l\'autre ?' : 'Are the profile\'s personal details consistent across conversations?'}</li>
+            <li>${isFr ? 'Le profil évite-t-il de répondre aux questions directes ou simples ?' : 'Does the profile avoid answering direct or simple questions?'}</li>
+            <li>${isFr ? 'Le profil pousse-t-il vers une proximité émotionnelle rapide ?' : 'Does the profile push for rapid emotional closeness?'}</li>
+            <li>${isFr ? 'Le profil envoie-t-il des messages excessivement ou à des heures inhabituelles ?' : 'Does the profile message excessively or at unusual hours?'}</li>
+            <li>${isFr ? 'Le profil évite-t-il de montrer son environnement ou sa vie quotidienne ?' : 'Does the profile avoid showing their environment or daily life?'}</li>
+            <li>${isFr ? 'Le profil vous pousse-t-il à garder la relation secrète ?' : 'Does the profile pressure you to keep the connection secret?'}</li>
+            <li>${isFr ? 'Vous sentez-vous culpabilisé(e) quand vous posez des questions raisonnables ?' : 'Do you feel guilt‑tripped when you ask reasonable questions?'}</li>
+            <li>${isFr ? 'Le profil a-t-il essayé de créer une dépendance émotionnelle ?' : 'Has the profile tried to create emotional dependency?'}</li>
+            <li>${isFr ? 'Vous sentez-vous subtilement isolé(e) de vos amis ou conseillers ?' : 'Do you feel subtly isolated from friends or advisers?'}</li>
+            <li>${isFr ? 'Le profil utilise-t-il des histoires dramatiques (maladie, tragédie, danger) ?' : 'Does the profile use dramatic stories (illness, tragedy, danger)?'}</li>
+            <li>${isFr ? 'Le profil a-t-il mentionné des comptes bloqués, des fonds gelés ou des complications de voyage ?' : 'Has the profile mentioned blocked accounts, frozen funds, or travel complications?'}</li>
+            <li>${isFr ? 'Le profil a-t-il laissé entendre qu\'il avait besoin d\'aide ou de soutien émotionnel/financier ?' : 'Has the profile hinted at needing help or emotional/financial support?'}</li>
+            <li>${isFr ? 'Le profil vous a-t-il demandé de payer des frais de voyage, visas, douane ou coûts similaires ?' : 'Has the profile asked you to pay for travel, visas, customs fees, or similar costs?'}</li>
           </ol>
         </div>
         
@@ -1873,33 +1882,30 @@ export const AnalyzePage = () => {
                 </CardContent>
               </Card>
 
-              {/* Risk-Assessment Checklist */}
+              {/* Risk Indicator Checklist */}
               <Card className="bg-zinc-900/50 border-red-800/30">
                 <CardHeader>
-                  <CardTitle className="text-lg text-red-400">
-                    {isFr ? "Évaluation des Risques" : "Risk-Assessment"}
+                  <CardTitle className="text-lg text-red-400 text-center">
+                    {isFr ? "Liste de Contrôle des Indicateurs de Risque" : "Risk Indicator Checklist"}
                   </CardTitle>
-                  <CardDescription className="text-zinc-400">
-                    {isFr ? "Cochez Oui ou Non pour chaque question" : "Tick Yes or No for each question"}
-                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {[
-                    { key: 'risk_q1', en: "Has the profile made a normal, clear video call?", fr: "Le profil a-t-il fait un appel vidéo normal et clair ?" },
-                    { key: 'risk_q2', en: "Has the profile sent a timestamped photo on request?", fr: "Le profil a-t-il envoyé une photo horodatée sur demande ?" },
-                    { key: 'risk_q3', en: "Are the profile's details consistent?", fr: "Les détails du profil sont-ils cohérents ?" },
-                    { key: 'risk_q4', en: "Does the profile avoid answering direct questions?", fr: "Le profil évite-t-il de répondre aux questions directes ?" },
-                    { key: 'risk_q5', en: "Does the profile push for fast emotional intimacy?", fr: "Le profil pousse-t-il vers une intimité émotionnelle rapide ?" },
-                    { key: 'risk_q6', en: "Does the profile message excessively or at strange hours?", fr: "Le profil envoie-t-il des messages excessivement ou à des heures étranges ?" },
-                    { key: 'risk_q7', en: "Does the profile avoid showing his environment or daily life?", fr: "Le profil évite-t-il de montrer son environnement ou sa vie quotidienne ?" },
-                    { key: 'risk_q8', en: "Does the profile pressure for secrecy?", fr: "Le profil exerce-t-il une pression pour le secret ?" },
-                    { key: 'risk_q9', en: "Do you feel the profile guilt-trips you when questioned?", fr: "Avez-vous l'impression que le profil vous culpabilise quand vous posez des questions ?" },
-                    { key: 'risk_q10', en: "Has or does the profile create emotional dependency?", fr: "Le profil crée-t-il une dépendance émotionnelle ?" },
-                    { key: 'risk_q11', en: "Do you feel the profile isolates you from friends/advisers?", fr: "Avez-vous l'impression que le profil vous isole de vos amis/conseillers ?" },
+                    { key: 'risk_q1', en: "Has the profile completed a normal, clear, real‑time video call?", fr: "Le profil a-t-il effectué un appel vidéo normal, clair et en temps réel ?" },
+                    { key: 'risk_q2', en: "Has the profile sent a timestamped photo when requested?", fr: "Le profil a-t-il envoyé une photo horodatée sur demande ?" },
+                    { key: 'risk_q3', en: "Are the profile's personal details consistent across conversations?", fr: "Les détails personnels du profil sont-ils cohérents d'une conversation à l'autre ?" },
+                    { key: 'risk_q4', en: "Does the profile avoid answering direct or simple questions?", fr: "Le profil évite-t-il de répondre aux questions directes ou simples ?" },
+                    { key: 'risk_q5', en: "Does the profile push for rapid emotional closeness?", fr: "Le profil pousse-t-il vers une proximité émotionnelle rapide ?" },
+                    { key: 'risk_q6', en: "Does the profile message excessively or at unusual hours?", fr: "Le profil envoie-t-il des messages excessivement ou à des heures inhabituelles ?" },
+                    { key: 'risk_q7', en: "Does the profile avoid showing their environment or daily life?", fr: "Le profil évite-t-il de montrer son environnement ou sa vie quotidienne ?" },
+                    { key: 'risk_q8', en: "Does the profile pressure you to keep the connection secret?", fr: "Le profil vous pousse-t-il à garder la relation secrète ?" },
+                    { key: 'risk_q9', en: "Do you feel guilt‑tripped when you ask reasonable questions?", fr: "Vous sentez-vous culpabilisé(e) quand vous posez des questions raisonnables ?" },
+                    { key: 'risk_q10', en: "Has the profile tried to create emotional dependency?", fr: "Le profil a-t-il essayé de créer une dépendance émotionnelle ?" },
+                    { key: 'risk_q11', en: "Do you feel subtly isolated from friends or advisers?", fr: "Vous sentez-vous subtilement isolé(e) de vos amis ou conseillers ?" },
                     { key: 'risk_q12', en: "Does the profile use dramatic stories (illness, tragedy, danger)?", fr: "Le profil utilise-t-il des histoires dramatiques (maladie, tragédie, danger) ?" },
-                    { key: 'risk_q13', en: "Has the profile mentioned blocked accounts, frozen funds, or travel issues?", fr: "Le profil a-t-il mentionné des comptes bloqués, des fonds gelés ou des problèmes de voyage ?" },
-                    { key: 'risk_q14', en: "Has the profile hinted needing help or support?", fr: "Le profil a-t-il laissé entendre qu'il avait besoin d'aide ou de soutien ?" },
-                    { key: 'risk_q15', en: "Has the profile asked you to pay for travel, visas, or customs fees?", fr: "Le profil vous a-t-il demandé de payer des frais de voyage, visas ou douane ?" }
+                    { key: 'risk_q13', en: "Has the profile mentioned blocked accounts, frozen funds, or travel complications?", fr: "Le profil a-t-il mentionné des comptes bloqués, des fonds gelés ou des complications de voyage ?" },
+                    { key: 'risk_q14', en: "Has the profile hinted at needing help or emotional/financial support?", fr: "Le profil a-t-il laissé entendre qu'il avait besoin d'aide ou de soutien émotionnel/financier ?" },
+                    { key: 'risk_q15', en: "Has the profile asked you to pay for travel, visas, customs fees, or similar costs?", fr: "Le profil vous a-t-il demandé de payer des frais de voyage, visas, douane ou coûts similaires ?" }
                   ].map((q, idx) => (
                     <div key={q.key} className="flex items-start gap-3 py-2 border-b border-zinc-800/50 last:border-0">
                       <span className="text-zinc-400 text-sm font-medium min-w-[28px] pt-0.5">{idx + 1}.</span>
