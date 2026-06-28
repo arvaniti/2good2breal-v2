@@ -1773,7 +1773,7 @@ export const AnalyzePage = () => {
                     </div>
                     <div className="space-y-2">
                       <Label className="text-zinc-300">
-                        {isFr ? "Comment communiquez-vous avec le profil ?" : "How do you communicate with the profile?"}
+                        {isFr ? "Comment communiquez-vous régulièrement avec le profil ?" : "How do you regularly communicate with the profile?"}
                       </Label>
                       <Select value={formData.communication_method} onValueChange={(v) => handleChange('communication_method', v)}>
                         <SelectTrigger className="bg-zinc-800/50 border-zinc-700 text-white" data-testid="communication-method">
