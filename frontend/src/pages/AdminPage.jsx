@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { Shield, FileText, Clock, CheckCircle, Eye, LogOut, ChevronDown, ChevronUp, AlertTriangle, RefreshCw, User, Send, Printer, Trash2, Download, FileDown, Search, ExternalLink, GitCompare } from 'lucide-react';
+import { Shield, FileText, Clock, CheckCircle, Eye, LogOut, ChevronDown, ChevronUp, AlertTriangle, RefreshCw, User, Send, Printer, Trash2, Download, FileDown, Search, ExternalLink, GitCompare, Settings, Save, RotateCcw } from 'lucide-react';
 import axios from 'axios';
 import { toast } from 'sonner';
 import ProfileSeekerPage from './ProfileSeekerPage';
@@ -874,6 +874,157 @@ function AnalysisRow(props) {
   );
 }
 
+// ============ TEMPLATES MANAGER ============
+function TemplatesManager() {
+  const [templates, setTemplates] = useState([]);
+  const [selectedSlug, setSelectedSlug] = useState(null);
+  const [editBody, setEditBody] = useState('');
+  const [editSubject, setEditSubject] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem('admin_token');
+
+  const categoryColors = {
+    email: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+    ui: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+    document: 'bg-green-500/20 text-green-400 border-green-500/30',
+    ai: 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+  };
+
+  const categoryLabels = { email: 'Email', ui: 'UI Message', document: 'Document', ai: 'AI Prompt' };
+
+  useEffect(function() {
+    fetch(API + '/admin/templates', { headers: { Authorization: 'Bearer ' + token } })
+      .then(function(r) { return r.json(); })
+      .then(function(data) { setTemplates(data); setLoading(false); })
+      .catch(function() { setLoading(false); });
+  }, [token]);
+
+  function selectTemplate(slug) {
+    const t = templates.find(function(x) { return x.slug === slug; });
+    if (t) {
+      setSelectedSlug(slug);
+      setEditBody(t.body);
+      setEditSubject(t.subject || '');
+    }
+  }
+
+  function handleSave() {
+    setSaving(true);
+    fetch(API + '/admin/templates/' + selectedSlug, {
+      method: 'PUT',
+      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ body: editBody, subject: editSubject })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(updated) {
+      setTemplates(function(prev) { return prev.map(function(t) { return t.slug === selectedSlug ? updated : t; }); });
+      toast.success('Template saved');
+      setSaving(false);
+    })
+    .catch(function() { toast.error('Failed to save'); setSaving(false); });
+  }
+
+  function handleReset() {
+    if (!window.confirm('Reset this template to its default content? Your changes will be lost.')) return;
+    fetch(API + '/admin/templates/' + selectedSlug + '/reset', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token }
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(updated) {
+      setTemplates(function(prev) { return prev.map(function(t) { return t.slug === selectedSlug ? updated : t; }); });
+      setEditBody(updated.body);
+      setEditSubject(updated.subject || '');
+      toast.success('Template reset to default');
+    })
+    .catch(function() { toast.error('Failed to reset'); });
+  }
+
+  const selected = templates.find(function(t) { return t.slug === selectedSlug; });
+
+  if (loading) return React.createElement('div', { className: 'text-center py-12 text-zinc-500' }, 'Loading templates...');
+
+  return React.createElement('div', { className: 'grid grid-cols-1 lg:grid-cols-3 gap-6' },
+    // Left: Template list
+    React.createElement(Card, { className: 'bg-zinc-900/50 border-zinc-800 lg:col-span-1' },
+      React.createElement(CardHeader, null,
+        React.createElement(CardTitle, { className: 'text-white flex items-center gap-2 text-base' },
+          React.createElement(Settings, { className: 'w-5 h-5 text-purple-400' }), ' Document Templates'
+        )
+      ),
+      React.createElement(CardContent, { className: 'space-y-2' },
+        templates.map(function(t) {
+          return React.createElement('button', {
+            key: t.slug,
+            onClick: function() { selectTemplate(t.slug); },
+            className: 'w-full text-left p-3 rounded-lg border transition-colors ' + (selectedSlug === t.slug ? 'bg-purple-900/30 border-purple-600' : 'bg-zinc-800/50 border-zinc-700/50 hover:border-zinc-600'),
+            'data-testid': 'template-' + t.slug
+          },
+            React.createElement('div', { className: 'flex items-center justify-between mb-1' },
+              React.createElement('span', { className: 'text-sm font-medium text-white' }, t.name),
+              React.createElement(Badge, { className: 'text-xs ' + (categoryColors[t.category] || '') }, categoryLabels[t.category] || t.category)
+            ),
+            React.createElement('p', { className: 'text-xs text-zinc-500 line-clamp-1' }, t.description)
+          );
+        })
+      )
+    ),
+    // Right: Editor
+    React.createElement('div', { className: 'lg:col-span-2' },
+      selected ? React.createElement(Card, { className: 'bg-zinc-900/50 border-zinc-800' },
+        React.createElement(CardHeader, null,
+          React.createElement('div', { className: 'flex items-center justify-between' },
+            React.createElement('div', null,
+              React.createElement(CardTitle, { className: 'text-white text-lg' }, selected.name),
+              React.createElement('p', { className: 'text-sm text-zinc-400 mt-1' }, selected.description)
+            ),
+            React.createElement('div', { className: 'flex gap-2' },
+              React.createElement(Button, { onClick: handleReset, variant: 'outline', size: 'sm', className: 'border-zinc-600 text-zinc-400 hover:text-white' },
+                React.createElement(RotateCcw, { className: 'w-4 h-4 mr-1' }), ' Reset'
+              ),
+              React.createElement(Button, { onClick: handleSave, size: 'sm', className: 'bg-purple-600 hover:bg-purple-500', disabled: saving },
+                React.createElement(Save, { className: 'w-4 h-4 mr-1' }), saving ? 'Saving...' : 'Save'
+              )
+            )
+          )
+        ),
+        React.createElement(CardContent, { className: 'space-y-4' },
+          selected.subject !== undefined && selected.subject !== '' ?
+            React.createElement('div', null,
+              React.createElement('label', { className: 'text-sm font-medium text-zinc-300 block mb-1' }, 'Subject Line'),
+              React.createElement('input', {
+                type: 'text',
+                value: editSubject,
+                onChange: function(e) { setEditSubject(e.target.value); },
+                className: 'w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-white text-sm focus:border-purple-500 focus:outline-none',
+                'data-testid': 'template-subject-input'
+              })
+            ) : null,
+          React.createElement('div', null,
+            React.createElement('label', { className: 'text-sm font-medium text-zinc-300 block mb-1' }, 'Template Content'),
+            React.createElement('textarea', {
+              value: editBody,
+              onChange: function(e) { setEditBody(e.target.value); },
+              className: 'w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white text-sm font-mono leading-relaxed focus:border-purple-500 focus:outline-none resize-y',
+              style: { minHeight: '500px' },
+              'data-testid': 'template-body-input'
+            })
+          ),
+          React.createElement('div', { className: 'bg-zinc-800/50 rounded-lg p-3 border border-zinc-700/50' },
+            React.createElement('p', { className: 'text-xs text-zinc-500' },
+              'Variables in {curly_braces} will be replaced with actual data when the template is used. ',
+              'Last updated: ', selected.updated_at ? new Date(selected.updated_at).toLocaleString() : 'N/A'
+            )
+          )
+        )
+      ) : React.createElement('div', { className: 'flex items-center justify-center h-64 text-zinc-500' },
+        React.createElement('p', null, 'Select a template from the list to view and edit')
+      )
+    )
+  );
+}
+
 export function AdminPage() {
   const navigate = useNavigate();
   const [analyses, setAnalyses] = useState([]);
@@ -1036,6 +1187,13 @@ export function AdminPage() {
           >
             <GitCompare className="w-4 h-4" /> Comparator
           </button>
+          <button
+            onClick={function() { setActiveTab('templates'); }}
+            className={'flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ' + (activeTab === 'templates' ? 'bg-purple-600 text-white' : 'text-zinc-400 hover:text-white hover:bg-zinc-800')}
+            data-testid="tab-templates"
+          >
+            <Settings className="w-4 h-4" /> Templates
+          </button>
         </div>
 
         {activeTab === 'submissions' && (
@@ -1073,6 +1231,10 @@ export function AdminPage() {
 
         {activeTab === 'comparator' && (
           <ComparatorPage />
+        )}
+
+        {activeTab === 'templates' && (
+          <TemplatesManager />
         )}
       </div>
     </div>

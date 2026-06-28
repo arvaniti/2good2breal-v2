@@ -13,6 +13,7 @@ from routes.dashboard import router as dashboard_router
 from routes.payments import router as payments_router
 from routes.seeker import router as seeker_router
 from routes.health import router as health_router
+from routes.templates import router as templates_router, seed_templates
 
 # Configure logging
 logging.basicConfig(
@@ -36,6 +37,7 @@ api_router.include_router(dashboard_router)
 api_router.include_router(payments_router)
 api_router.include_router(seeker_router)
 api_router.include_router(health_router)
+api_router.include_router(templates_router)
 
 # Include the api_router in the main app
 app.include_router(api_router)
@@ -49,6 +51,7 @@ async def startup_event():
             await db.command('ping')
             logger.info("Database connection verified successfully")
             await seed_admin_user()
+            await seed_templates()
         except Exception as e:
             logger.warning(f"Database ping failed during startup (non-blocking): {e}")
     else:
