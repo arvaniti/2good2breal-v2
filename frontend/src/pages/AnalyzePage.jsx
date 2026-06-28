@@ -896,8 +896,8 @@ export const AnalyzePage = () => {
 
                 <p>
                   {isFr 
-                    ? 'Vous recevrez le rapport complet de vérification par email dans un délai de 48 heures. Un email de confirmation a également été envoyé à l\'adresse indiquée.'
-                    : 'You will receive the complete verification report by email within 48 hours. A confirmation email has also been sent to the address provided.'}
+                    ? 'Vous recevrez le rapport de vérification complété par email dans un délai de 48 heures. Si vous avez besoin d\'informations supplémentaires entre-temps, notre équipe vous contactera par email.'
+                    : 'You will receive the completed verification report via email within 48 hours. If you require any additional information in the meantime, our team will contact you by email.'}
                 </p>
 
                 <p>
