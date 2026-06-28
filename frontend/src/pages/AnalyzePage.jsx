@@ -1783,6 +1783,7 @@ export const AnalyzePage = () => {
                           <SelectItem value="video_call">{isFr ? "Appel vidéo" : "Video call"}</SelectItem>
                           <SelectItem value="in_person">{isFr ? "En personne" : "In person"}</SelectItem>
                           <SelectItem value="email_text">{isFr ? "Email / SMS" : "Email / Text"}</SelectItem>
+                          <SelectItem value="whatsapp">WhatsApp</SelectItem>
                           <SelectItem value="other">{isFr ? "Autre" : "Other"}</SelectItem>
                         </SelectContent>
                       </Select>
