@@ -639,23 +639,48 @@ export const AnalyzePage = () => {
         <!-- RISK INDICATOR CHECKLIST -->
         <div class="section" style="margin-top: 20px;">
           <div class="section-title" style="color: #dc2626; border-bottom-color: #dc2626;">${isFr ? 'LISTE DE CONTRÔLE DES INDICATEURS DE RISQUE' : 'RISK INDICATOR CHECKLIST'}</div>
-          <ol style="margin: 0; padding-left: 20px; line-height: 2.2; color: #333;">
-            <li>${isFr ? 'Le profil a-t-il effectué un appel vidéo normal, clair et en temps réel ?' : 'Has the profile completed a normal, clear, real‑time video call?'}</li>
-            <li>${isFr ? 'Le profil a-t-il envoyé une photo horodatée sur demande ?' : 'Has the profile sent a timestamped photo when requested?'}</li>
-            <li>${isFr ? 'Les détails personnels du profil sont-ils cohérents d\'une conversation à l\'autre ?' : 'Are the profile\'s personal details consistent across conversations?'}</li>
-            <li>${isFr ? 'Le profil évite-t-il de répondre aux questions directes ou simples ?' : 'Does the profile avoid answering direct or simple questions?'}</li>
-            <li>${isFr ? 'Le profil pousse-t-il vers une proximité émotionnelle rapide ?' : 'Does the profile push for rapid emotional closeness?'}</li>
-            <li>${isFr ? 'Le profil envoie-t-il des messages excessivement ou à des heures inhabituelles ?' : 'Does the profile message excessively or at unusual hours?'}</li>
-            <li>${isFr ? 'Le profil évite-t-il de montrer son environnement ou sa vie quotidienne ?' : 'Does the profile avoid showing their environment or daily life?'}</li>
-            <li>${isFr ? 'Le profil vous pousse-t-il à garder la relation secrète ?' : 'Does the profile pressure you to keep the connection secret?'}</li>
-            <li>${isFr ? 'Vous sentez-vous culpabilisé(e) quand vous posez des questions raisonnables ?' : 'Do you feel guilt‑tripped when you ask reasonable questions?'}</li>
-            <li>${isFr ? 'Le profil a-t-il essayé de créer une dépendance émotionnelle ?' : 'Has the profile tried to create emotional dependency?'}</li>
-            <li>${isFr ? 'Vous sentez-vous subtilement isolé(e) de vos amis ou conseillers ?' : 'Do you feel subtly isolated from friends or advisers?'}</li>
-            <li>${isFr ? 'Le profil utilise-t-il des histoires dramatiques (maladie, tragédie, danger) ?' : 'Does the profile use dramatic stories (illness, tragedy, danger)?'}</li>
-            <li>${isFr ? 'Le profil a-t-il mentionné des comptes bloqués, des fonds gelés ou des complications de voyage ?' : 'Has the profile mentioned blocked accounts, frozen funds, or travel complications?'}</li>
-            <li>${isFr ? 'Le profil a-t-il laissé entendre qu\'il avait besoin d\'aide ou de soutien émotionnel/financier ?' : 'Has the profile hinted at needing help or emotional/financial support?'}</li>
-            <li>${isFr ? 'Le profil vous a-t-il demandé de payer des frais de voyage, visas, douane ou coûts similaires ?' : 'Has the profile asked you to pay for travel, visas, customs fees, or similar costs?'}</li>
-          </ol>
+          <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+            <thead>
+              <tr style="background: #fef2f2;">
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: left; width: 5%;">#</th>
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: left;">${isFr ? 'Question' : 'Question'}</th>
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: center; width: 8%; color: #16a34a;">${isFr ? 'Oui' : 'Yes'}</th>
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: center; width: 12%; color: #d97706;">${isFr ? 'Parfois' : 'Sometimes'}</th>
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: center; width: 8%; color: #dc2626;">${isFr ? 'Non' : 'No'}</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${[
+                { key: 'risk_q1', en: 'Has the profile completed a normal, clear, real‑time video call?', fr: 'Le profil a-t-il effectué un appel vidéo normal, clair et en temps réel ?' },
+                { key: 'risk_q2', en: 'Has the profile sent a timestamped photo when requested?', fr: 'Le profil a-t-il envoyé une photo horodatée sur demande ?' },
+                { key: 'risk_q3', en: "Are the profile's personal details consistent across conversations?", fr: "Les détails personnels du profil sont-ils cohérents d'une conversation à l'autre ?" },
+                { key: 'risk_q4', en: 'Does the profile avoid answering direct or simple questions?', fr: 'Le profil évite-t-il de répondre aux questions directes ou simples ?' },
+                { key: 'risk_q5', en: 'Does the profile push for rapid emotional closeness?', fr: 'Le profil pousse-t-il vers une proximité émotionnelle rapide ?' },
+                { key: 'risk_q6', en: 'Does the profile message excessively or at unusual hours?', fr: 'Le profil envoie-t-il des messages excessivement ou à des heures inhabituelles ?' },
+                { key: 'risk_q7', en: 'Does the profile avoid showing their environment or daily life?', fr: 'Le profil évite-t-il de montrer son environnement ou sa vie quotidienne ?' },
+                { key: 'risk_q8', en: 'Does the profile pressure you to keep the connection secret?', fr: 'Le profil vous pousse-t-il à garder la relation secrète ?' },
+                { key: 'risk_q9', en: 'Do you feel guilt‑tripped when you ask reasonable questions?', fr: 'Vous sentez-vous culpabilisé(e) quand vous posez des questions raisonnables ?' },
+                { key: 'risk_q10', en: 'Has the profile tried to create emotional dependency?', fr: 'Le profil a-t-il essayé de créer une dépendance émotionnelle ?' },
+                { key: 'risk_q11', en: 'Do you feel subtly isolated from friends or advisers?', fr: 'Vous sentez-vous subtilement isolé(e) de vos amis ou conseillers ?' },
+                { key: 'risk_q12', en: 'Does the profile use dramatic stories (illness, tragedy, danger)?', fr: 'Le profil utilise-t-il des histoires dramatiques (maladie, tragédie, danger) ?' },
+                { key: 'risk_q13', en: 'Has the profile mentioned blocked accounts, frozen funds, or travel complications?', fr: 'Le profil a-t-il mentionné des comptes bloqués, des fonds gelés ou des complications de voyage ?' },
+                { key: 'risk_q14', en: 'Has the profile hinted at needing help or emotional/financial support?', fr: "Le profil a-t-il laissé entendre qu'il avait besoin d'aide ou de soutien émotionnel/financier ?" },
+                { key: 'risk_q15', en: 'Has the profile asked you to pay for travel, visas, customs fees, or similar costs?', fr: 'Le profil vous a-t-il demandé de payer des frais de voyage, visas, douane ou coûts similaires ?' }
+              ].map((q, i) => {
+                const val = formData[q.key] || '';
+                const yesCheck = val === 'yes' ? '&#10004;' : '';
+                const sometimesCheck = val === 'sometimes' ? '&#10004;' : '';
+                const noCheck = val === 'no' ? '&#10004;' : '';
+                return '<tr>' +
+                  '<td style="border: 1px solid #ddd; padding: 5px; text-align: center;">' + (i+1) + '</td>' +
+                  '<td style="border: 1px solid #ddd; padding: 5px;">' + (isFr ? q.fr : q.en) + '</td>' +
+                  '<td style="border: 1px solid #ddd; padding: 5px; text-align: center; font-size: 16px; color: #16a34a; font-weight: bold;">' + yesCheck + '</td>' +
+                  '<td style="border: 1px solid #ddd; padding: 5px; text-align: center; font-size: 16px; color: #d97706; font-weight: bold;">' + sometimesCheck + '</td>' +
+                  '<td style="border: 1px solid #ddd; padding: 5px; text-align: center; font-size: 16px; color: #dc2626; font-weight: bold;">' + noCheck + '</td>' +
+                  '</tr>';
+              }).join('')}
+            </tbody>
+          </table>
         </div>
         
         <div class="footer">
@@ -1922,6 +1947,19 @@ export const AnalyzePage = () => {
                           />
                           <span className={`text-xs font-medium ${formData[q.key] === 'yes' ? 'text-green-400' : 'text-zinc-500'}`}>
                             {isFr ? 'Oui' : 'Yes'}
+                          </span>
+                        </label>
+                        <label className="flex items-center gap-1.5 cursor-pointer">
+                          <input
+                            type="radio"
+                            name={q.key}
+                            value="sometimes"
+                            checked={formData[q.key] === 'sometimes'}
+                            onChange={() => handleChange(q.key, 'sometimes')}
+                            className="accent-amber-500"
+                          />
+                          <span className={`text-xs font-medium ${formData[q.key] === 'sometimes' ? 'text-amber-400' : 'text-zinc-500'}`}>
+                            {isFr ? 'Parfois' : 'Sometimes'}
                           </span>
                         </label>
                         <label className="flex items-center gap-1.5 cursor-pointer">

@@ -584,23 +584,47 @@ function AnalysisRow(props) {
         <!-- RISK INDICATOR CHECKLIST -->
         <div class="section" style="margin-top: 20px;">
           <div class="section-title" style="color: #dc2626; border-bottom-color: #dc2626;">RISK INDICATOR CHECKLIST</div>
-          <ol style="margin: 0; padding-left: 20px; line-height: 2.2; color: #333;">
-            <li>Has the profile completed a normal, clear, real‑time video call?</li>
-            <li>Has the profile sent a timestamped photo when requested?</li>
-            <li>Are the profile's personal details consistent across conversations?</li>
-            <li>Does the profile avoid answering direct or simple questions?</li>
-            <li>Does the profile push for rapid emotional closeness?</li>
-            <li>Does the profile message excessively or at unusual hours?</li>
-            <li>Does the profile avoid showing their environment or daily life?</li>
-            <li>Does the profile pressure you to keep the connection secret?</li>
-            <li>Do you feel guilt‑tripped when you ask reasonable questions?</li>
-            <li>Has the profile tried to create emotional dependency?</li>
-            <li>Do you feel subtly isolated from friends or advisers?</li>
-            <li>Does the profile use dramatic stories (illness, tragedy, danger)?</li>
-            <li>Has the profile mentioned blocked accounts, frozen funds, or travel complications?</li>
-            <li>Has the profile hinted at needing help or emotional/financial support?</li>
-            <li>Has the profile asked you to pay for travel, visas, customs fees, or similar costs?</li>
-          </ol>
+          <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+            <thead>
+              <tr style="background: #fef2f2;">
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: left; width: 5%;">#</th>
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: left;">Question</th>
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: center; width: 8%; color: #16a34a;">Yes</th>
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: center; width: 12%; color: #d97706;">Sometimes</th>
+                <th style="border: 1px solid #ddd; padding: 6px; text-align: center; width: 8%; color: #dc2626;">No</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${(() => {
+                const ra = formData.risk_assessment || {};
+                const questions = [
+                  { key: 'q1_video_call', text: 'Has the profile completed a normal, clear, real‑time video call?' },
+                  { key: 'q2_timestamped_photo', text: 'Has the profile sent a timestamped photo when requested?' },
+                  { key: 'q3_details_consistent', text: "Are the profile's personal details consistent across conversations?" },
+                  { key: 'q4_avoids_questions', text: 'Does the profile avoid answering direct or simple questions?' },
+                  { key: 'q5_fast_intimacy', text: 'Does the profile push for rapid emotional closeness?' },
+                  { key: 'q6_excessive_messaging', text: 'Does the profile message excessively or at unusual hours?' },
+                  { key: 'q7_hides_environment', text: 'Does the profile avoid showing their environment or daily life?' },
+                  { key: 'q8_pressures_secrecy', text: 'Does the profile pressure you to keep the connection secret?' },
+                  { key: 'q9_guilt_trips', text: 'Do you feel guilt‑tripped when you ask reasonable questions?' },
+                  { key: 'q10_emotional_dependency', text: 'Has the profile tried to create emotional dependency?' },
+                  { key: 'q11_isolates_you', text: 'Do you feel subtly isolated from friends or advisers?' },
+                  { key: 'q12_dramatic_stories', text: 'Does the profile use dramatic stories (illness, tragedy, danger)?' },
+                  { key: 'q13_blocked_accounts', text: 'Has the profile mentioned blocked accounts, frozen funds, or travel complications?' },
+                  { key: 'q14_needs_help', text: 'Has the profile hinted at needing help or emotional/financial support?' },
+                  { key: 'q15_pay_travel', text: 'Has the profile asked you to pay for travel, visas, customs fees, or similar costs?' }
+                ];
+                return questions.map((q, i) => {
+                  const val = ra[q.key] || '';
+                  return '<tr><td style="border:1px solid #ddd;padding:5px;text-align:center;">' + (i+1) + '</td>' +
+                    '<td style="border:1px solid #ddd;padding:5px;">' + q.text + '</td>' +
+                    '<td style="border:1px solid #ddd;padding:5px;text-align:center;font-size:16px;color:#16a34a;font-weight:bold;">' + (val === 'yes' ? '&#10004;' : '') + '</td>' +
+                    '<td style="border:1px solid #ddd;padding:5px;text-align:center;font-size:16px;color:#d97706;font-weight:bold;">' + (val === 'sometimes' ? '&#10004;' : '') + '</td>' +
+                    '<td style="border:1px solid #ddd;padding:5px;text-align:center;font-size:16px;color:#dc2626;font-weight:bold;">' + (val === 'no' ? '&#10004;' : '') + '</td></tr>';
+                }).join('');
+              })()}
+            </tbody>
+          </table>
         </div>
         
         ${analysis.ai_analysis ? `
